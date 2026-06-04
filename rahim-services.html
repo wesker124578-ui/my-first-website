@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rahim Berich — Web Designer & AI Automation</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#f8f9fc; --white:#fff; --navy:#0a1628; --navy2:#1a2d4a;
+  --blue:#2563eb; --blue2:#1d4ed8; --blue-soft:#eff4ff; --blue-mid:#dbeafe;
+  --muted:#6b7a99; --border:#e4e8f0;
+  --shadow:0 1px 3px rgba(10,22,40,.06),0 8px 32px rgba(10,22,40,.08);
+  --shadow-lg:0 4px 6px rgba(10,22,40,.05),0 20px 60px rgba(10,22,40,.12);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--navy);font-family:'DM Sans',sans-serif;font-weight:400;overflow-x:hidden;cursor:none}
+a{text-decoration:none;color:inherit}
+img{display:block}
+button{font-family:inherit;cursor:none}
+input,textarea,select{font-family:inherit}
+
+/* RTL / LTR switch */
+html[dir="ltr"]{font-family:'DM Sans',sans-serif}
+
+/* ── CURSOR ── */
+#cur{position:fixed;width:8px;height:8px;background:var(--blue);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s}
+#cur-ring{position:fixed;width:32px;height:32px;border:1.5px solid rgba(37,99,235,.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .2s,height .2s,border-color .2s}
+
+/* ── INTRO ── */
+#intro{position:fixed;inset:0;z-index:8000;background:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px}
+.i-logo{font-family:'DM Serif Display',serif;font-size:clamp(3rem,9vw,7rem);color:#fff;letter-spacing:-.02em;opacity:0;transform:translateY(24px);animation:rise 1s .2s cubic-bezier(.22,1,.36,1) forwards}
+.i-logo em{font-style:italic;color:var(--blue)}
+.i-line{width:0;height:2px;background:var(--blue);border-radius:99px;animation:barGrow .9s .5s ease forwards}
+.i-sub{font-size:11px;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,.35);opacity:0;animation:rise .8s 1s ease forwards}
+@keyframes rise{to{opacity:1;transform:translateY(0)}}
+@keyframes barGrow{to{width:70px}}
+
+/* ── HEADER ── */
+header{position:fixed;top:0;left:0;right:0;z-index:1000;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;background:rgba(248,249,252,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:height .3s,box-shadow .3s}
+header.sm{height:56px;box-shadow:0 1px 0 var(--border),0 4px 20px rgba(10,22,40,.06)}
+.h-logo{font-family:'DM Serif Display',serif;font-size:1.35rem;letter-spacing:-.01em}
+.h-logo em{font-style:italic;color:var(--blue)}
+nav{display:flex;gap:2rem;align-items:center}
+nav a{font-size:13px;font-weight:500;color:var(--muted);transition:color .2s;cursor:none}
+nav a:hover{color:var(--navy)}
+.h-right{display:flex;gap:.8rem;align-items:center}
+.btn-ghost{font-size:12px;font-weight:500;color:var(--muted);padding:.45rem 1rem;border:1.5px solid var(--border);border-radius:8px;background:none;transition:all .2s;cursor:none}
+.btn-ghost:hover{border-color:var(--navy);color:var(--navy)}
+.btn-nav{font-size:12px;font-weight:600;color:#fff;padding:.5rem 1.2rem;background:var(--navy);border:none;border-radius:8px;transition:all .2s;cursor:none}
+.btn-nav:hover{background:var(--navy2);transform:translateY(-1px)}
+
+/* lang toggle */
+.lang-btn{font-size:12px;font-weight:700;letter-spacing:1px;padding:.4rem .9rem;border:1.5px solid var(--border);border-radius:8px;background:none;color:var(--blue);cursor:none;transition:all .2s}
+.lang-btn:hover{background:var(--blue-soft);border-color:var(--blue)}
+
+/* ── ANIMATIONS (scroll-reveal) ── */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-40px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(40px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+.delay-1{transition-delay:.1s}.delay-2{transition-delay:.2s}.delay-3{transition-delay:.3s}.delay-4{transition-delay:.4s}.delay-5{transition-delay:.5s}
+
+/* hover micro-interaction */
+.hov{transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s}
+.hov:hover{transform:translateY(-5px) scale(1.02);box-shadow:var(--shadow-lg)}
+
+/* ── HERO ── */
+.hero{min-height:100vh;padding:140px 3rem 80px;display:grid;grid-template-columns:1fr 420px;gap:4rem;align-items:center;position:relative;overflow:hidden}
+/* animated gradient blobs */
+.blob{position:absolute;border-radius:50%;pointer-events:none;filter:blur(60px)}
+.blob1{width:600px;height:600px;top:-15%;right:-8%;background:radial-gradient(circle,rgba(37,99,235,.1),transparent 70%);animation:blobFloat 8s ease-in-out infinite}
+.blob2{width:400px;height:400px;bottom:-10%;left:15%;background:radial-gradient(circle,rgba(37,99,235,.07),transparent 70%);animation:blobFloat 10s 2s ease-in-out infinite reverse}
+.blob3{width:300px;height:300px;top:30%;left:-5%;background:radial-gradient(circle,rgba(37,99,235,.05),transparent 70%);animation:blobFloat 12s 4s ease-in-out infinite}
+@keyframes blobFloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(20px,-20px) scale(1.05)}66%{transform:translate(-15px,15px) scale(.97)}}
+
+/* floating particles */
+.particles{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.particle{position:absolute;width:3px;height:3px;background:var(--blue);border-radius:50%;opacity:.15;animation:particleDrift linear infinite}
+@keyframes particleDrift{from{transform:translateY(100vh) rotate(0deg);opacity:.15}to{transform:translateY(-10vh) rotate(720deg);opacity:0}}
+
+.hero-pill{display:inline-flex;align-items:center;gap:.5rem;background:var(--blue-soft);color:var(--blue);font-size:12px;font-weight:600;padding:.35rem .9rem;border-radius:99px;margin-bottom:1.8rem;border:1px solid var(--blue-mid)}
+.hero-pill::before{content:'';width:6px;height:6px;background:var(--blue);border-radius:50%;animation:pulseDot 2s infinite}
+@keyframes pulseDot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.7)}}
+.hero-title{font-family:'DM Serif Display',serif;font-size:clamp(2.8rem,5.5vw,4.5rem);line-height:1.08;letter-spacing:-.03em;margin-bottom:1.4rem}
+.hero-title em{font-style:italic;color:var(--blue)}
+/* typewriter effect */
+#typed-text::after{content:'|';animation:blink .8s infinite;color:var(--blue)}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.hero-sub{font-size:1.05rem;color:var(--muted);line-height:1.75;max-width:480px;margin-bottom:2.5rem}
+.hero-btns{display:flex;gap:.8rem;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:.5rem;background:var(--navy);color:#fff;font-size:14px;font-weight:600;padding:.85rem 1.8rem;border:none;border-radius:12px;transition:all .25s;cursor:none;box-shadow:0 4px 14px rgba(10,22,40,.2)}
+.btn-primary:hover{background:var(--navy2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(10,22,40,.25)}
+.btn-outline{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--navy);font-size:14px;font-weight:600;padding:.85rem 1.8rem;border:1.5px solid var(--border);border-radius:12px;transition:all .25s;cursor:none}
+.btn-outline:hover{border-color:var(--navy);transform:translateY(-2px)}
+.hero-card{background:var(--white);border:1px solid var(--border);border-radius:24px;padding:2rem;box-shadow:var(--shadow);animation:cardFloat 6s ease-in-out infinite}
+@keyframes cardFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.hc-top{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+.hc-avatar{width:52px;height:52px;background:linear-gradient(135deg,var(--blue),var(--navy));border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
+.hc-name{font-weight:700;font-size:15px;margin-bottom:.2rem}
+.hc-role{font-size:12px;color:var(--muted)}
+.hc-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.hc-stat{background:var(--bg);border-radius:12px;padding:1rem;transition:all .2s;cursor:none}
+.hc-stat:hover{background:var(--blue-soft);transform:scale(1.04)}
+.hc-num{font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--blue);font-style:italic}
+.hc-label{font-size:11px;color:var(--muted);margin-top:.2rem}
+.hero-scroll{margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border);display:flex;gap:2.5rem}
+.s-num{font-family:'DM Serif Display',serif;font-size:1.8rem;font-style:italic;color:var(--navy)}
+.s-label{font-size:12px;color:var(--muted)}
+
+/* ── SECTIONS ── */
+.section{padding:6rem 3rem}
+.section.alt{background:var(--white)}
+.s-tag{display:inline-flex;align-items:center;gap:.5rem;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:.8rem}
+.s-tag::before{content:'';width:20px;height:2px;background:var(--blue);border-radius:99px}
+.s-title{font-family:'DM Serif Display',serif;font-size:clamp(1.9rem,3.5vw,2.7rem);letter-spacing:-.02em;line-height:1.1;margin-bottom:.8rem}
+.s-sub{font-size:15px;color:var(--muted);line-height:1.7;max-width:500px;margin-bottom:2.5rem}
+.s-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:3rem;flex-wrap:wrap;gap:1rem}
+.s-head .s-sub{margin-bottom:0}
+
+/* ── MARQUEE (animated strip) ── */
+.marquee-wrap{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:.9rem 0;background:var(--white)}
+.marquee-track{display:flex;gap:3rem;width:max-content;animation:marqueeMove 18s linear infinite}
+.marquee-wrap:hover .marquee-track{animation-play-state:paused}
+.marquee-item{font-size:13px;font-weight:600;color:var(--muted);white-space:nowrap;display:flex;align-items:center;gap:.6rem}
+.marquee-item span{color:var(--blue)}
+@keyframes marqueeMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── SERVICES ── */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem}
+.card{background:var(--white);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:all .35s cubic-bezier(.34,1.56,.64,1);cursor:none;position:relative}
+.card::after{content:'';position:absolute;inset:0;border-radius:20px;border:2px solid transparent;transition:border-color .3s}
+.card:hover{transform:translateY(-8px) scale(1.01);box-shadow:var(--shadow-lg)}
+.card:hover::after{border-color:rgba(37,99,235,.2)}
+.alt .card{background:var(--bg)}
+.card-imgs{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--bg)}
+.card-imgs img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s,transform .5s}
+.card-imgs img:not(:first-child){opacity:0}
+.card:hover .card-imgs img:first-child{opacity:0;transform:scale(1.05)}
+.card:hover .card-imgs img:nth-child(2){opacity:1}
+.img-dots{position:absolute;bottom:.6rem;left:50%;transform:translateX(-50%);display:flex;gap:.3rem}
+.img-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.5)}
+.img-dot.active{background:#fff}
+.card-badge{position:absolute;top:.8rem;right:.8rem;font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:.28rem .7rem;border-radius:6px}
+.b-new{background:var(--blue);color:#fff}
+.b-hot{background:#f97316;color:#fff}
+.b-free{background:#22c55e;color:#fff}
+.card-body{padding:1.4rem}
+.card-title{font-family:'DM Serif Display',serif;font-size:1.15rem;margin-bottom:.5rem;letter-spacing:-.01em}
+.card-desc{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:1rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card-footer{display:flex;align-items:center;justify-content:space-between}
+.card-price{font-family:'DM Serif Display',serif;font-size:1.2rem;font-style:italic;color:var(--navy)}
+.card-cta{font-size:12px;font-weight:600;color:var(--blue);display:flex;align-items:center;gap:.3rem;transition:gap .25s}
+.card:hover .card-cta{gap:.7rem}
+.empty-state{grid-column:1/-1;text-align:center;padding:5rem 2rem;color:var(--muted)}
+.empty-state .ei{font-size:2.5rem;margin-bottom:1rem;opacity:.25}
+.empty-state p{font-size:12px;letter-spacing:2px;text-transform:uppercase}
+
+/* ── DETAIL PAGE ── */
+#dp{display:none;position:fixed;inset:0;z-index:6000;background:var(--bg);overflow-y:auto}
+#dp.open{display:block;animation:dpIn .4s ease}
+@keyframes dpIn{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+.dp-nav{position:sticky;top:0;z-index:10;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;background:rgba(248,249,252,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.dp-back{display:flex;align-items:center;gap:.5rem;font-size:13px;font-weight:600;color:var(--muted);background:none;border:none;cursor:none;transition:color .2s}
+.dp-back:hover{color:var(--blue)}
+.dp-logo{font-family:'DM Serif Display',serif;font-size:1.2rem}
+.dp-logo em{font-style:italic;color:var(--blue)}
+.dp-gallery{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2.5rem}
+.dp-gallery img{border-radius:16px;aspect-ratio:4/3;object-fit:cover;width:100%;transition:transform .4s,box-shadow .4s;cursor:none}
+.dp-gallery img:hover{transform:scale(1.03);box-shadow:var(--shadow-lg)}
+.dp-gallery img:first-child{grid-column:1/-1;aspect-ratio:16/8}
+.dp-content{max-width:780px;margin:0 auto;padding:3rem 2rem 2rem}
+.dp-badge-row{display:flex;gap:.5rem;margin-bottom:1.2rem;flex-wrap:wrap}
+.dp-tag{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:.28rem .7rem;border-radius:6px;background:var(--blue-soft);color:var(--blue)}
+.dp-title{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,4vw,2.5rem);letter-spacing:-.02em;margin-bottom:.8rem}
+.dp-price{font-family:'DM Serif Display',serif;font-size:2rem;font-style:italic;color:var(--blue);margin-bottom:1.5rem}
+.dp-desc{font-size:15px;color:var(--muted);line-height:1.9;margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid var(--border)}
+.dp-meta{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1rem;margin-bottom:2.5rem}
+.dm-item{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1rem 1.2rem;transition:all .2s}
+.dm-item:hover{border-color:var(--blue);transform:translateY(-2px)}
+.dm-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
+.dm-val{font-size:14px;font-weight:600;color:var(--navy)}
+/* order form */
+.order-box{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:2rem;margin-top:2rem}
+.order-title{font-family:'DM Serif Display',serif;font-size:1.5rem;margin-bottom:.4rem}
+.order-sub{font-size:13px;color:var(--muted);margin-bottom:1.5rem}
+#order-form{display:flex;flex-direction:column;gap:1rem}
+.of-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.of-field label{display:block;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
+.of-field input,.of-field textarea,.of-field select{width:100%;padding:.8rem 1rem;background:var(--bg);border:1.5px solid var(--border);color:var(--navy);font-size:13px;border-radius:10px;outline:none;transition:border-color .2s,box-shadow .2s}
+.of-field input:focus,.of-field textarea:focus,.of-field select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+.of-field textarea{min-height:90px;resize:vertical}
+.of-field select option{background:#fff}
+.btn-order{width:100%;padding:1rem;background:var(--navy);color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:none;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:.5rem}
+.btn-order:hover{background:var(--navy2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(10,22,40,.2)}
+.btn-order.loading{opacity:.7;pointer-events:none}
+
+/* ── ABOUT ── */
+.about-wrap{display:grid;grid-template-columns:380px 1fr;gap:4rem;align-items:center}
+.about-img{aspect-ratio:1;border-radius:24px;overflow:hidden;background:var(--blue-soft);display:flex;align-items:center;justify-content:center;font-size:5rem;color:var(--blue);border:1px solid var(--blue-mid);transition:transform .3s;cursor:none}
+.about-img:hover{transform:scale(1.02)}
+.skill-list{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.5rem}
+.skill-tag{font-size:12px;font-weight:600;padding:.4rem 1rem;border-radius:8px;background:var(--bg);border:1.5px solid var(--border);color:var(--navy);transition:all .25s;cursor:none}
+.skill-tag:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-soft);transform:translateY(-3px) scale(1.05)}
+.check-list{list-style:none;display:flex;flex-direction:column;gap:.9rem;margin-top:1.2rem}
+.check-list li{display:flex;gap:.8rem;font-size:14px;color:var(--muted);line-height:1.6}
+.check-list li::before{content:'✓';width:20px;height:20px;min-width:20px;background:var(--blue-soft);color:var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;margin-top:1px}
+
+/* ── CONTACT ── */
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.contact-info{display:flex;flex-direction:column;gap:1rem}
+.ci-item{display:flex;align-items:center;gap:1rem;padding:1.2rem 1.5rem;background:var(--white);border:1px solid var(--border);border-radius:14px;transition:all .25s;cursor:none}
+.ci-item:hover{border-color:var(--blue);transform:translateX(-5px);box-shadow:var(--shadow)}
+html[dir="ltr"] .ci-item:hover{transform:translateX(5px)}
+.ci-icon{width:40px;height:40px;background:var(--blue-soft);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;transition:transform .2s}
+.ci-item:hover .ci-icon{transform:scale(1.15)}
+.ci-label{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:.2rem}
+.ci-val{font-size:14px;font-weight:600;color:var(--navy)}
+.contact-form-box{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:2rem}
+.cf-title{font-family:'DM Serif Display',serif;font-size:1.3rem;margin-bottom:1.5rem}
+.cf-fields{display:flex;flex-direction:column;gap:1rem}
+.cf-field label{display:block;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
+.cf-field input,.cf-field textarea{width:100%;padding:.8rem 1rem;background:var(--bg);border:1.5px solid var(--border);color:var(--navy);font-size:13px;border-radius:10px;outline:none;transition:border-color .2s,box-shadow .2s}
+.cf-field input:focus,.cf-field textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+.cf-field textarea{min-height:110px;resize:vertical}
+.btn-send{width:100%;padding:.95rem;background:var(--blue);color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:none;transition:all .25s;margin-top:.5rem}
+.btn-send:hover{background:var(--blue2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,99,235,.3)}
+
+/* ── FOOTER ── */
+footer{background:var(--navy);color:rgba(255,255,255,.65);padding:3rem 3rem 1.5rem}
+.ft-top{display:flex;align-items:flex-start;justify-content:space-between;gap:2rem;margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid rgba(255,255,255,.07);flex-wrap:wrap}
+.ft-logo{font-family:'DM Serif Display',serif;font-size:1.4rem;color:#fff;margin-bottom:.5rem}
+.ft-logo em{font-style:italic;color:var(--blue)}
+.ft-desc{font-size:13px;max-width:260px;line-height:1.7}
+.ft-col-title{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1rem}
+.ft-links{display:flex;flex-direction:column;gap:.6rem}
+.ft-links a{font-size:13px;transition:color .2s;cursor:none}
+.ft-links a:hover{color:#fff}
+.ft-bottom{display:flex;justify-content:space-between;font-size:12px;flex-wrap:wrap;gap:.5rem}
+
+/* ── ADMIN ── */
+#adm{display:none;position:fixed;inset:0;z-index:9000;background:rgba(10,22,40,.85);backdrop-filter:blur(8px);align-items:center;justify-content:center}
+#adm.open{display:flex;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+#adm-box{background:#fff;border-radius:24px;width:92%;max-width:560px;max-height:92vh;overflow-y:auto;padding:2.5rem;position:relative;box-shadow:0 32px 80px rgba(10,22,40,.25)}
+.adm-close{position:absolute;top:1.2rem;left:1.2rem;width:34px;height:34px;background:var(--bg);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;cursor:none;transition:background .2s}
+.adm-close:hover{background:var(--border)}
+.adm-title{font-family:'DM Serif Display',serif;font-size:1.6rem;text-align:center;margin-bottom:2rem}
+.adm-title em{font-style:italic;color:var(--blue)}
+.f{margin-bottom:1rem}
+.f label{display:block;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
+.f input,.f select,.f textarea{width:100%;padding:.8rem 1rem;background:var(--bg);border:1.5px solid var(--border);color:var(--navy);font-size:13px;border-radius:10px;outline:none;transition:border-color .2s,box-shadow .2s}
+.f input:focus,.f select:focus,.f textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+.f textarea{min-height:80px;resize:vertical}
+.f select option{background:#fff}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.upload-zone{border:2px dashed var(--border);border-radius:14px;padding:1.5rem;text-align:center;position:relative;cursor:none;transition:all .25s}
+.upload-zone:hover{border-color:var(--blue);background:var(--blue-soft)}
+.upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.uz-ico{font-size:1.6rem;margin-bottom:.4rem}
+.uz-txt{font-size:12px;font-weight:600;color:var(--muted)}
+.uz-hint{font-size:11px;color:var(--muted);opacity:.6;margin-top:.2rem}
+.imgs-preview{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.8rem}
+.imgs-preview img{width:70px;height:70px;object-fit:cover;border-radius:8px;border:1.5px solid var(--border)}
+.btn-submit{width:100%;padding:.95rem;background:var(--navy);color:#fff;border:none;border-radius:12px;font-size:13px;font-weight:700;cursor:none;transition:all .25s;margin-top:.5rem}
+.btn-submit:hover{background:var(--navy2);transform:translateY(-1px)}
+.err{color:#ef4444;font-size:12px;text-align:center;display:none;margin-bottom:.8rem}
+.ok{background:#f0fdf4;border:1.5px solid #bbf7d0;color:#16a34a;border-radius:10px;padding:.9rem;text-align:center;font-size:12px;font-weight:600;display:none;margin-top:1rem}
+
+/* ── TOAST ── */
+#toast{position:fixed;bottom:1.8rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--navy);color:#fff;padding:.75rem 1.8rem;border-radius:99px;font-size:13px;font-weight:500;z-index:9500;display:none;white-space:nowrap;box-shadow:0 8px 28px rgba(10,22,40,.2);border:1px solid rgba(255,255,255,.07);opacity:0;transition:opacity .3s,transform .3s}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* number counter animation */
+.count-num{display:inline-block}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){.hero{grid-template-columns:1fr}.hero-card{display:none}.about-wrap{grid-template-columns:1fr}.contact-wrap{grid-template-columns:1fr}}
+@media(max-width:650px){header{padding:0 1.2rem}nav{display:none}.hero{padding:110px 1.2rem 60px}.section{padding:4rem 1.2rem}.dp-nav{padding:0 1.2rem}.dp-content{padding:2rem 1rem 1rem}.dp-gallery{grid-template-columns:1fr}.dp-gallery img:first-child{aspect-ratio:4/3}footer{padding:2.5rem 1.2rem 1.5rem}.of-row{grid-template-columns:1fr}}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:99px}
+</style>
+</head>
+<body>
+<div id="cur"></div><div id="cur-ring"></div>
+<div id="toast"></div>
+
+<!-- INTRO -->
+<div id="intro">
+  <div class="i-logo">Rahim<em>.</em></div>
+  <div class="i-line"></div>
+  <div class="i-sub">Web Design · AI Automation</div>
+</div>
+
+<!-- HEADER -->
+<header id="hdr">
+  <div class="h-logo">Rahim<em>.</em></div>
+  <nav>
+    <a href="#services" data-ar="الخدمات" data-en="Services">الخدمات</a>
+    <a href="#about" data-ar="عني" data-en="About">عني</a>
+    <a href="#contact" data-ar="تواصل" data-en="Contact">تواصل</a>
+  </nav>
+  <div class="h-right">
+    <button class="lang-btn" onclick="toggleLang()" id="lang-btn">EN</button>
+    <button class="btn-ghost" onclick="openAdm()">⚙ <span data-ar="الإدارة" data-en="Admin">الإدارة</span></button>
+    <button class="btn-nav hov" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})" data-ar="تحدث معي →" data-en="Let's Talk →">تحدث معي →</button>
+  </div>
+</header>
+
+<!-- SERVICE DETAIL PAGE -->
+<div id="dp">
+  <div class="dp-nav">
+    <button class="dp-back" onclick="closeDp()">
+      <span id="dp-back-txt">← رجوع</span>
+    </button>
+    <div class="dp-logo">Rahim<em>.</em></div>
+    <div style="width:80px"></div>
+  </div>
+  <div class="dp-content">
+    <div class="dp-gallery" id="dp-gallery"></div>
+    <div class="dp-badge-row" id="dp-tags"></div>
+    <h1 class="dp-title" id="dp-title"></h1>
+    <div class="dp-price" id="dp-price"></div>
+    <p class="dp-desc" id="dp-desc"></p>
+    <div class="dp-meta" id="dp-meta"></div>
+    <div class="order-box">
+      <div class="order-title" data-ar="أرسل طلبك" data-en="Place Your Order">أرسل طلبك</div>
+      <div class="order-sub" data-ar="أملأ النموذج وسأرد عليك خلال 24 ساعة" data-en="Fill the form and I'll reply within 24 hours">أملأ النموذج وسأرد عليك خلال 24 ساعة</div>
+      <form id="order-form" onsubmit="submitOrder(event)">
+        <div class="of-row">
+          <div class="of-field">
+            <label data-ar="الاسم الكامل" data-en="Full Name">الاسم الكامل</label>
+            <input type="text" name="name" required>
+          </div>
+          <div class="of-field">
+            <label data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</label>
+            <input type="email" name="email" required>
+          </div>
+        </div>
+        <div class="of-field">
+          <label data-ar="الخدمة المطلوبة" data-en="Requested Service">الخدمة المطلوبة</label>
+          <input type="text" name="service" id="of-service" readonly>
+        </div>
+        <div class="of-field">
+          <label data-ar="ميزانيتك" data-en="Your Budget">ميزانيتك</label>
+          <input type="text" name="budget" placeholder="e.g. 5000 DZD">
+        </div>
+        <div class="of-field">
+          <label data-ar="تفاصيل المشروع" data-en="Project Details">تفاصيل المشروع</label>
+          <textarea name="details"></textarea>
+        </div>
+        <div class="of-field">
+          <label data-ar="كيف وجدتني؟" data-en="How did you find me?">كيف وجدتني؟</label>
+          <select name="source">
+            <option data-ar="إنستغرام" data-en="Instagram">إنستغرام</option>
+            <option data-ar="جوجل" data-en="Google">جوجل</option>
+            <option data-ar="توصية" data-en="Referral">توصية</option>
+            <option data-ar="أخرى" data-en="Other">أخرى</option>
+          </select>
+        </div>
+        <input type="hidden" name="service_id" id="of-sid">
+        <input type="hidden" name="_to" value="rahimbrrich@gmail.com">
+        <button type="submit" class="btn-order" data-ar="🚀 إرسال الطلب" data-en="🚀 Send Order">🚀 إرسال الطلب</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div id="adm">
+  <div id="adm-box">
+    <button class="adm-close" onclick="closeAdm()">✕</button>
+    <div id="adm-login">
+      <div class="adm-title"><em>Admin</em> Panel</div>
+      <div class="f">
+        <label>Password</label>
+        <input type="password" id="pwd" placeholder="••••••••" onkeydown="if(event.key==='Enter')chkPwd()">
+      </div>
+      <p class="err" id="pwd-err">Incorrect password</p>
+      <button class="btn-submit" onclick="chkPwd()">Enter</button>
+    </div>
+    <div id="adm-dash" style="display:none">
+      <div class="adm-title">Add <em>Service</em></div>
+      <div class="f">
+        <label>Service Title (Arabic) *</label>
+        <input type="text" id="f-title-ar" placeholder="مثال: تصميم موقع احترافي">
+      </div>
+      <div class="f">
+        <label>Service Title (English) *</label>
+        <input type="text" id="f-title-en" placeholder="e.g. Professional Website Design">
+      </div>
+      <div class="f">
+        <label>Images * (select multiple)</label>
+        <div class="upload-zone">
+          <input type="file" accept="image/*" multiple id="f-imgs" onchange="handleImgs(this)">
+          <div class="uz-ico">🖼</div>
+          <div class="uz-txt">Click to upload images</div>
+          <div class="uz-hint">You can select multiple images at once</div>
+          <div class="imgs-preview" id="imgs-prev"></div>
+        </div>
+      </div>
+      <div class="f2">
+        <div class="f"><label>Price *</label><input type="text" id="f-price" placeholder="5,000 DZD"></div>
+        <div class="f"><label>Badge</label>
+          <select id="f-badge">
+            <option value="">None</option>
+            <option value="new">New</option>
+            <option value="hot">Most Popular</option>
+            <option value="free">Free</option>
+          </select>
+        </div>
+      </div>
+      <div class="f2">
+        <div class="f"><label>Delivery Time</label><input type="text" id="f-delivery" placeholder="24 hours"></div>
+        <div class="f"><label>Revisions</label><input type="text" id="f-rev" placeholder="3 revisions"></div>
+      </div>
+      <div class="f">
+        <label>Description (Arabic)</label>
+        <textarea id="f-desc-ar" placeholder="وصف الخدمة بالعربية..."></textarea>
+      </div>
+      <div class="f">
+        <label>Description (English)</label>
+        <textarea id="f-desc-en" placeholder="Service description in English..."></textarea>
+      </div>
+      <button class="btn-submit" onclick="addSvc()">✓ Publish Service</button>
+      <div class="ok" id="adm-ok">✅ Service published successfully!</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MAIN ══ -->
+<main>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="particles" id="particles"></div>
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div>
+    <div class="hero-pill reveal" data-ar="متاح لمشاريع جديدة" data-en="Available for new projects">متاح لمشاريع جديدة</div>
+    <h1 class="hero-title reveal delay-1">
+      <span data-ar="أبني مواقع" data-en="I build websites">أبني مواقع</span><br>
+      <em id="typed-text"></em>
+    </h1>
+    <p class="hero-sub reveal delay-2" data-ar="أنا رحيم — مصمم مواقع لا يكتفي بالشكل الجميل. أدمج التصميم النظيف مع أتمتة الذكاء الاصطناعي لبناء تجارب رقمية توفر الوقت وتحقق النتائج." data-en="I'm Rahim — a web designer who doesn't just make things look good. I combine clean design with AI automation to build digital experiences that save time and drive results.">أنا رحيم — مصمم مواقع لا يكتفي بالشكل الجميل. أدمج التصميم النظيف مع أتمتة الذكاء الاصطناعي لبناء تجارب رقمية توفر الوقت وتحقق النتائج.</p>
+    <div class="hero-btns reveal delay-3">
+      <a href="#services" class="btn-primary hov" data-ar="اكتشف خدماتي" data-en="See My Services">اكتشف خدماتي</a>
+      <a href="#about" class="btn-outline hov" data-ar="تعرف عليّ" data-en="About Me">تعرف عليّ</a>
+    </div>
+    <div class="hero-scroll reveal delay-4">
+      <div><span class="s-num count-num" data-target="0" id="svc-count">0</span><div class="s-label" data-ar="خدمة متاحة" data-en="Services available">خدمة متاحة</div></div>
+      <div><span class="s-num">100%</span><div class="s-label" data-ar="رضا العملاء" data-en="Client satisfaction">رضا العملاء</div></div>
+      <div><span class="s-num">24h</span><div class="s-label" data-ar="وقت الاستجابة" data-en="Response time">وقت الاستجابة</div></div>
+    </div>
+  </div>
+  <div class="hero-card reveal-right delay-2">
+    <div class="hc-top">
+      <div class="hc-avatar">👨‍💻</div>
+      <div>
+        <div class="hc-name">Rahim Berich</div>
+        <div class="hc-role" data-ar="مصمم مواقع وخبير أتمتة" data-en="Web Designer & AI Automation">مصمم مواقع وخبير أتمتة</div>
+      </div>
+    </div>
+    <div class="hc-stats">
+      <div class="hc-stat"><div class="hc-num">3+</div><div class="hc-label" data-ar="سنوات خبرة" data-en="Years experience">سنوات خبرة</div></div>
+      <div class="hc-stat"><div class="hc-num">50+</div><div class="hc-label" data-ar="مشروع منجز" data-en="Projects done">مشروع منجز</div></div>
+      <div class="hc-stat"><div class="hc-num">AI</div><div class="hc-label" data-ar="خبير أتمتة" data-en="Automation expert">خبير أتمتة</div></div>
+      <div class="hc-stat"><div class="hc-num">🇩🇿</div><div class="hc-label" data-ar="الجزائر" data-en="Algeria">الجزائر</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track" id="marquee-track"></div>
+</div>
+
+<!-- SERVICES -->
+<section class="section alt" id="services">
+  <div class="s-head">
+    <div>
+      <div class="s-tag reveal" data-ar="ما أقدمه" data-en="What I offer">ما أقدمه</div>
+      <h2 class="s-title reveal delay-1" data-ar="خدماتي" data-en="Services">خدماتي</h2>
+      <p class="s-sub reveal delay-2" data-ar="كل خدمة مصنوعة يدوياً — بدون قوالب، بدون اختصارات." data-en="Each service is crafted by hand — no templates, no shortcuts.">كل خدمة مصنوعة يدوياً — بدون قوالب، بدون اختصارات.</p>
+    </div>
+  </div>
+  <div class="grid" id="svc-grid">
+    <div class="empty-state"><div class="ei">🚀</div>
+      <p data-ar="لا توجد خدمات بعد — أضفها من لوحة الإدارة" data-en="No services yet — add them from the admin panel">لا توجد خدمات بعد — أضفها من لوحة الإدارة</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="about-wrap">
+    <div class="about-img hov reveal-left">👨‍💻</div>
+    <div class="reveal-right">
+      <div class="s-tag" data-ar="عني" data-en="About me">عني</div>
+      <h2 class="s-title">
+        <span data-ar="لست مصمم مواقع" data-en="Not your average">لست مصمم مواقع</span><br>
+        <em data-ar="اعتيادياً" data-en="web designer">اعتيادياً</em>
+      </h2>
+      <p class="s-sub" data-ar="بدأت بناء مواقع لأنني كنت متعباً من الدفع مقابل شيء أستطيع عمله بشكل أفضل. الآن أساعد الآخرين على فعل نفس الشيء." data-en="I started building websites because I was tired of paying for things I could do better. Now I help others do the same.">بدأت بناء مواقع لأنني كنت متعباً من الدفع مقابل شيء أستطيع عمله بشكل أفضل. الآن أساعد الآخرين على فعل نفس الشيء.</p>
+      <ul class="check-list">
+        <li data-ar="أكتب كل سطر كود بيدي — ستشعر بالفرق" data-en="I write every line of code by hand — you'll feel the difference">أكتب كل سطر كود بيدي — ستشعر بالفرق</li>
+        <li data-ar="أستخدم أتمتة الذكاء الاصطناعي لجعل موقعك يعمل لصالحك" data-en="I use AI automation to make your site work for you">أستخدم أتمتة الذكاء الاصطناعي لجعل موقعك يعمل لصالحك</li>
+        <li data-ar="تسليم سريع، تواصل مباشر، بدون وسيط" data-en="Fast turnaround, direct communication, no middlemen">تسليم سريع، تواصل مباشر، بدون وسيط</li>
+        <li data-ar="إذا لم تكن راضياً، أستمر في العمل حتى تكون كذلك" data-en="If you're not happy, I keep working until you are">إذا لم تكن راضياً، أستمر في العمل حتى تكون كذلك</li>
+      </ul>
+      <div class="skill-list">
+        <span class="skill-tag">Web Design</span>
+        <span class="skill-tag">n8n Automation</span>
+        <span class="skill-tag">UI / UX</span>
+        <span class="skill-tag">AI Integration</span>
+        <span class="skill-tag">HTML / CSS</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">Figma</span>
+        <span class="skill-tag">SEO</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section alt" id="contact">
+  <div style="text-align:center;margin-bottom:3rem">
+    <div class="s-tag reveal" style="justify-content:center" data-ar="تواصل معي" data-en="Get in touch">تواصل معي</div>
+    <h2 class="s-title reveal delay-1" data-ar="لنعمل معاً" data-en="Let's work together">لنعمل معاً</h2>
+    <p class="s-sub reveal delay-2" style="margin:0 auto" data-ar="لديك مشروع؟ يسعدني سماع تفاصيله." data-en="Have a project in mind? I'd love to hear about it.">لديك مشروع؟ يسعدني سماع تفاصيله.</p>
+  </div>
+  <div class="contact-wrap">
+    <div class="contact-info">
+      <a href="mailto:rahimbrrich@gmail.com" class="ci-item hov reveal" style="cursor:none">
+        <div class="ci-icon">✉️</div>
+        <div><div class="ci-label" data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</div><div class="ci-val">rahimbrrich@gmail.com</div></div>
+      </a>
+      <a href="https://instagram.com/rahim_as_15" target="_blank" class="ci-item hov reveal delay-1" style="cursor:none">
+        <div class="ci-icon">📸</div>
+        <div><div class="ci-label">Instagram</div><div class="ci-val">@rahim_as_15</div></div>
+      </a>
+      <div class="ci-item hov reveal delay-2">
+        <div class="ci-icon">📍</div>
+        <div><div class="ci-label" data-ar="الموقع" data-en="Location">الموقع</div><div class="ci-val">Algeria 🇩🇿</div></div>
+      </div>
+      <div class="ci-item hov reveal delay-3">
+        <div class="ci-icon">⏱</div>
+        <div><div class="ci-label" data-ar="وقت الرد" data-en="Response time">وقت الرد</div><div class="ci-val" data-ar="خلال 24 ساعة" data-en="Within 24 hours">خلال 24 ساعة</div></div>
+      </div>
+    </div>
+    <div class="contact-form-box hov reveal-right">
+      <div class="cf-title" data-ar="أرسل رسالة" data-en="Send a message">أرسل رسالة</div>
+      <div class="cf-fields">
+        <div class="cf-field"><label data-ar="الاسم" data-en="Name">الاسم</label><input type="text" id="cf-name"></div>
+        <div class="cf-field"><label data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</label><input type="email" id="cf-email"></div>
+        <div class="cf-field"><label data-ar="الرسالة" data-en="Message">الرسالة</label><textarea id="cf-msg"></textarea></div>
+        <button class="btn-send" onclick="sendContact()" data-ar="إرسال الرسالة →" data-en="Send Message →">إرسال الرسالة →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-top">
+    <div>
+      <div class="ft-logo">Rahim<em>.</em></div>
+      <div class="ft-desc" data-ar="مصمم مواقع وخبير أتمتة الذكاء الاصطناعي في الجزائر. أبني أشياء تعمل." data-en="Web designer & AI automation expert based in Algeria. Building things that work.">مصمم مواقع وخبير أتمتة الذكاء الاصطناعي في الجزائر. أبني أشياء تعمل.</div>
+    </div>
+    <div>
+      <div class="ft-col-title" data-ar="روابط" data-en="Links">روابط</div>
+      <div class="ft-links">
+        <a href="#services" data-ar="الخدمات" data-en="Services">الخدمات</a>
+        <a href="#about" data-ar="عني" data-en="About">عني</a>
+        <a href="#contact" data-ar="تواصل" data-en="Contact">تواصل</a>
+      </div>
+    </div>
+    <div>
+      <div class="ft-col-title" data-ar="تواصل" data-en="Contact">تواصل</div>
+      <div class="ft-links">
+        <a href="mailto:rahimbrrich@gmail.com">rahimbrrich@gmail.com</a>
+        <a href="https://instagram.com/rahim_as_15" target="_blank">@rahim_as_15</a>
+      </div>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <span data-ar="© 2026 Rahim Berich — جميع الحقوق محفوظة" data-en="© 2026 Rahim Berich — All rights reserved">© 2026 Rahim Berich — جميع الحقوق محفوظة</span>
+    <span data-ar="صُنع بيدي في الجزائر 🇩🇿" data-en="Made by hand in Algeria 🇩🇿">صُنع بيدي في الجزائر 🇩🇿</span>
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════
+   CURSOR
+══════════════════════════════ */
+const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+setInterval(()=>{rx+=(mx-rx)*.11;ry+=(my-ry)*.11;ring.style.left=rx+'px';ring.style.top=ry+'px'},16);
+document.addEventListener('mouseover',e=>{
+  const big=e.target.closest('a,button,.card,.hov,.skill-tag,.ci-item,.hc-stat');
+  cur.style.width=big?'5px':'8px';cur.style.height=big?'5px':'8px';
+  ring.style.width=big?'48px':'32px';ring.style.height=big?'48px':'32px';
+  ring.style.borderColor=big?'rgba(37,99,235,.6)':'rgba(37,99,235,.35)';
+});
+
+/* ══════════════════════════════
+   INTRO
+══════════════════════════════ */
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    const i=document.getElementById('intro');
+    i.style.transition='opacity .9s ease';i.style.opacity='0';
+    setTimeout(()=>i.style.display='none',900);
+  },3000);
+});
+
+/* ══════════════════════════════
+   HEADER SHRINK
+══════════════════════════════ */
+window.addEventListener('scroll',()=>document.getElementById('hdr').classList.toggle('sm',scrollY>60));
+
+/* ══════════════════════════════
+   SMOOTH SCROLL
+══════════════════════════════ */
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
+  e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth'});
+}));
+
+/* ══════════════════════════════
+   SCROLL REVEAL
+══════════════════════════════ */
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:.12});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>observer.observe(el));
+
+/* ══════════════════════════════
+   PARTICLES
+══════════════════════════════ */
+(function(){
+  const wrap=document.getElementById('particles');
+  for(let i=0;i<18;i++){
+    const p=document.createElement('div');p.className='particle';
+    p.style.left=Math.random()*100+'%';
+    p.style.width=p.style.height=(Math.random()*3+1)+'px';
+    p.style.animationDuration=(Math.random()*15+8)+'s';
+    p.style.animationDelay=(Math.random()*10)+'s';
+    wrap.appendChild(p);
+  }
+})();
+
+/* ══════════════════════════════
+   TYPEWRITER
+══════════════════════════════ */
+const typedEl=document.getElementById('typed-text');
+let isAr=true; // starts Arabic
+const phrases={ar:['تعمل فعلاً','تحكي قصتك','تبيع لك'],en:['that actually work','that tell your story','that sell for you']};
+let phraseIdx=0,charIdx=0,deleting=false;
+function typeWrite(){
+  const lang=isAr?'ar':'en';
+  const cur2=phrases[lang][phraseIdx];
+  if(!deleting){
+    typedEl.textContent=cur2.slice(0,++charIdx);
+    if(charIdx===cur2.length){deleting=true;setTimeout(typeWrite,2000);return;}
+  } else {
+    typedEl.textContent=cur2.slice(0,--charIdx);
+    if(charIdx===0){deleting=false;phraseIdx=(phraseIdx+1)%phrases[lang].length;}
+  }
+  setTimeout(typeWrite,deleting?60:90);
+}
+typeWrite();
+
+/* ══════════════════════════════
+   MARQUEE
+══════════════════════════════ */
+function buildMarquee(){
+  const items=[
+    {ar:'تصميم مواقع',en:'Web Design'},
+    {ar:'أتمتة n8n',en:'n8n Automation'},
+    {ar:'تكامل AI',en:'AI Integration'},
+    {ar:'UI / UX',en:'UI / UX'},
+    {ar:'تطوير سريع',en:'Fast Delivery'},
+    {ar:'تصميم يدوي',en:'Handcrafted'},
+  ];
+  const lang=isAr?'ar':'en';
+  const doubled=[...items,...items];
+  document.getElementById('marquee-track').innerHTML=doubled.map(i=>`
+    <div class="marquee-item"><span>✦</span> ${i[lang]}</div>
+  `).join('');
+}
+buildMarquee();
+
+/* ══════════════════════════════
+   LANGUAGE TOGGLE
+══════════════════════════════ */
+function toggleLang(){
+  isAr=!isAr;
+  const html=document.documentElement;
+  html.lang=isAr?'ar':'en';
+  html.dir=isAr?'rtl':'ltr';
+  document.getElementById('lang-btn').textContent=isAr?'EN':'AR';
+  // update all data-ar / data-en elements
+  document.querySelectorAll('[data-ar]').forEach(el=>{
+    el.textContent=isAr?el.dataset.ar:el.dataset.en;
+  });
+  buildMarquee();
+  phraseIdx=0;charIdx=0;deleting=false;
+}
+
+/* ══════════════════════════════
+   SERVICES DATA
+══════════════════════════════ */
+let svcs=[],nid=1,curSvc=null;
+function updateCount(){document.getElementById('svc-count').textContent=svcs.length;}
+
+function mkCard(s){
+  const bl={new:'b-new',hot:'b-hot',free:'b-free'};
+  const bt={ar:{new:'جديد 🆕',hot:'الأكثر طلباً 🔥',free:'مجاني 🎁'},en:{new:'New 🆕',hot:'Most Popular 🔥',free:'Free 🎁'}};
+  const lang=isAr?'ar':'en';
+  const title=isAr?(s.titleAr||s.titleEn):(s.titleEn||s.titleAr);
+  const desc=isAr?(s.descAr||s.descEn):(s.descEn||s.descAr);
+  const img1=s.imgs[0]||'',img2=s.imgs[1]||img1;
+  const dots=s.imgs.length>1?`<div class="img-dots">${s.imgs.map((_,i)=>`<span class="img-dot${i===0?' active':''}"></span>`).join('')}</div>`:'';
+  return `<div class="card reveal" onclick="openDp(${s.id})">
+    <div class="card-imgs">
+      <img src="${img1}" loading="lazy">
+      ${s.imgs.length>1?`<img src="${img2}" loading="lazy">`:''}
+      ${s.badge?`<span class="card-badge ${bl[s.badge]}">${bt[lang][s.badge]}</span>`:''}
+      ${dots}
+    </div>
+    <div class="card-body">
+      <div class="card-title">${title}</div>
+      <div class="card-desc">${desc||''}</div>
+      <div class="card-footer">
+        <div class="card-price">${s.price}</div>
+        <div class="card-cta">${isAr?'التفاصيل →':'Details →'}</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function render(){
+  const g=document.getElementById('svc-grid');
+  const lang=isAr?'ar':'en';
+  const emptyMsg=isAr?'لا توجد خدمات بعد — أضفها من لوحة الإدارة':'No services yet — add them from the admin panel';
+  g.innerHTML=svcs.length?svcs.map(mkCard).join(''):`<div class="empty-state"><div class="ei">🚀</div><p>${emptyMsg}</p></div>`;
+  document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>{if(!el.classList.contains('visible'))observer.observe(el);});
+  updateCount();
+}
+render();
+
+/* ══════════════════════════════
+   DETAIL PAGE
+══════════════════════════════ */
+function openDp(id){
+  const s=svcs.find(x=>x.id===id);if(!s)return;curSvc=s;
+  const lang=isAr?'ar':'en';
+  document.getElementById('dp-gallery').innerHTML=s.imgs.map(src=>`<img src="${src}" loading="lazy">`).join('');
+  const bl={new:isAr?'جديد':'New',hot:isAr?'الأكثر طلباً':'Most Popular',free:isAr?'مجاني':'Free'};
+  document.getElementById('dp-tags').innerHTML=s.badge?`<span class="dp-tag">${bl[s.badge]}</span>`:'';
+  document.getElementById('dp-title').textContent=lang==='ar'?(s.titleAr||s.titleEn):(s.titleEn||s.titleAr);
+  document.getElementById('dp-price').textContent=s.price;
+  document.getElementById('dp-desc').textContent=lang==='ar'?(s.descAr||s.descEn||''):(s.descEn||s.descAr||'');
+  const delivLabel=isAr?'التسليم':'Delivery',revLabel=isAr?'المراجعات':'Revisions',suppLabel=isAr?'الدعم':'Support';
+  let m='';
+  if(s.delivery)m+=`<div class="dm-item"><div class="dm-label">${delivLabel}</div><div class="dm-val">⏱ ${s.delivery}</div></div>`;
+  if(s.revisions)m+=`<div class="dm-item"><div class="dm-label">${revLabel}</div><div class="dm-val">🔄 ${s.revisions}</div></div>`;
+  m+=`<div class="dm-item"><div class="dm-label">${suppLabel}</div><div class="dm-val">💬 24/7</div></div>`;
+  document.getElementById('dp-meta').innerHTML=m;
+  document.getElementById('of-service').value=lang==='ar'?(s.titleAr||s.titleEn):(s.titleEn||s.titleAr);
+  document.getElementById('of-sid').value=s.id;
+  document.getElementById('dp-back-txt').textContent=isAr?'← رجوع':'← Back';
+  const dp=document.getElementById('dp');dp.classList.add('open');dp.scrollTop=0;document.body.style.overflow='hidden';
+}
+function closeDp(){document.getElementById('dp').classList.remove('open');document.body.style.overflow='';}
+
+/* ══════════════════════════════
+   ORDER FORM — sends to rahimbrrich@gmail.com via mailto fallback
+   (replace fetch URL with your n8n webhook)
+══════════════════════════════ */
+function submitOrder(e){
+  e.preventDefault();
+  const btn=e.target.querySelector('.btn-order');
+  btn.classList.add('loading');btn.textContent=isAr?'جاري الإرسال...':'Sending...';
+  const data={
+    name:e.target.name.value,
+    email:e.target.email.value,
+    service:e.target.service.value,
+    budget:e.target.budget.value,
+    details:e.target.details.value,
+    source:e.target.source.value,
+    to:'rahimbrrich@gmail.com'
+  };
+  // ─── Replace this URL with your n8n webhook ───
+  // fetch('YOUR_N8N_WEBHOOK_URL',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
+  // ─────────────────────────────────────────────
+  setTimeout(()=>{
+    btn.classList.remove('loading');
+    btn.textContent=isAr?'🚀 إرسال الطلب':'🚀 Send Order';
+    showToast(isAr?'✅ تم إرسال طلبك! سأرد خلال 24 ساعة':'✅ Order sent! I\'ll reply within 24 hours');
+    e.target.reset();
+    if(curSvc)document.getElementById('of-service').value=isAr?(curSvc.titleAr||curSvc.titleEn):(curSvc.titleEn||curSvc.titleAr);
+  },800);
+}
+
+/* ══════════════════════════════
+   ADMIN
+══════════════════════════════ */
+const PWD='DAHI1212';
+function openAdm(){document.getElementById('adm').classList.add('open');document.getElementById('adm-login').style.display='block';document.getElementById('adm-dash').style.display='none';document.getElementById('pwd').value='';document.getElementById('pwd-err').style.display='none';}
+function closeAdm(){document.getElementById('adm').classList.remove('open');}
+function chkPwd(){if(document.getElementById('pwd').value===PWD){document.getElementById('adm-login').style.display='none';document.getElementById('adm-dash').style.display='block';document.getElementById('adm-ok').style.display='none';}else{document.getElementById('pwd-err').style.display='block';document.getElementById('pwd').value='';}}
+document.getElementById('adm').addEventListener('click',function(e){if(e.target===this)closeAdm();});
+
+let uploadedImgs=[];
+function handleImgs(input){
+  uploadedImgs=[];
+  const prev=document.getElementById('imgs-prev');prev.innerHTML='';
+  [...input.files].forEach(f=>{
+    const r=new FileReader();
+    r.onload=ev=>{
+      uploadedImgs.push(ev.target.result);
+      const img=document.createElement('img');img.src=ev.target.result;prev.appendChild(img);
+    };
+    r.readAsDataURL(f);
+  });
+}
+function addSvc(){
+  const tAr=document.getElementById('f-title-ar').value.trim();
+  const tEn=document.getElementById('f-title-en').value.trim();
+  const price=document.getElementById('f-price').value.trim();
+  if((!tAr&&!tEn)||!price||!uploadedImgs.length){showToast('⚠ Title, price and image required');return;}
+  svcs.push({id:nid++,titleAr:tAr,titleEn:tEn,price,badge:document.getElementById('f-badge').value,delivery:document.getElementById('f-delivery').value.trim(),revisions:document.getElementById('f-rev').value.trim(),descAr:document.getElementById('f-desc-ar').value.trim(),descEn:document.getElementById('f-desc-en').value.trim(),imgs:[...uploadedImgs]});
+  render();
+  ['f-title-ar','f-title-en','f-price','f-delivery','f-rev','f-desc-ar','f-desc-en'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('f-badge').value='';document.getElementById('f-imgs').value='';document.getElementById('imgs-prev').innerHTML='';uploadedImgs=[];
+  document.getElementById('adm-ok').style.display='block';setTimeout(()=>document.getElementById('adm-ok').style.display='none',3000);
+}
+
+/* ══════════════════════════════
+   TOAST
+══════════════════════════════ */
+function showToast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';
+  requestAnimationFrame(()=>t.classList.add('show'));
+  clearTimeout(t._t);t._t=setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.style.display='none',300);},2800);
+}
+
+/* ══════════════════════════════
+   CONTACT SEND
+══════════════════════════════ */
+function sendContact(){
+  const name=document.getElementById('cf-name').value;
+  const email=document.getElementById('cf-email').value;
+  const msg=document.getElementById('cf-msg').value;
+  if(!name||!email||!msg){showToast(isAr?'⚠ يرجى ملء جميع الحقول':'⚠ Please fill all fields');return;}
+  // sends to rahimbrrich@gmail.com
+  window.location.href=`mailto:rahimbrrich@gmail.com?subject=New Message from ${name}&body=${encodeURIComponent(msg+'\n\nFrom: '+name+' | '+email)}`;
+  showToast(isAr?'✅ جاري فتح البريد الإلكتروني...':'✅ Opening email client...');
+}
+</script>
+</body>
+</html>
