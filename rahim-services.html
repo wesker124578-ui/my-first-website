@@ -307,235 +307,101 @@ footer{background:var(--navy);color:rgba(255,255,255,.65);padding:3rem 3rem 1.5r
 <div id="cur"></div><div id="cur-ring"></div>
 <div id="toast"></div>
 
+<!-- INTRO -->
 <div id="intro">
   <div class="i-logo">Rahim<em>.</em></div>
   <div class="i-line"></div>
   <div class="i-sub">Web Design · AI Automation</div>
 </div>
 
+<!-- HEADER -->
 <header id="hdr">
   <div class="h-logo">Rahim<em>.</em></div>
   <nav>
-    <a href="#services" data-ar="خدماتي" data-en="Services">خدماتي</a>
-    <a href="#about" data-ar="تعرف عليّ" data-en="About">تعرف عليّ</a>
-    <a href="#contact" data-ar="تواصل معي" data-en="Contact">تواصل معي</a>
+    <a href="#services" data-ar="الخدمات" data-en="Services">الخدمات</a>
+    <a href="#about" data-ar="عني" data-en="About">عني</a>
+    <a href="#contact" data-ar="تواصل" data-en="Contact">تواصل</a>
   </nav>
   <div class="h-right">
-    <button class="lang-btn" id="lang-btn" onclick="toggleLang()">EN</button>
-    <button class="btn-ghost" onclick="openAdm()" data-ar="الإدارة ⚙️" data-en="Admin ⚙️">الإدارة ⚙️</button>
-    <button class="btn-nav" onclick="location.href='#contact'" data-ar="ابدأ مشروعك" data-en="Start Project">ابدأ مشروعك</button>
+    <button class="lang-btn" onclick="toggleLang()" id="lang-btn">EN</button>
+    <button class="btn-ghost" onclick="openAdm()">⚙ <span data-ar="الإدارة" data-en="Admin">الإدارة</span></button>
+    <button class="btn-nav hov" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})" data-ar="تحدث معي →" data-en="Let's Talk →">تحدث معي →</button>
   </div>
 </header>
 
-<main>
-  <section class="hero" id="home">
-    <div class="blob blob1"></div><div class="blob blob2"></div><div class="blob blob3"></div>
-    <div class="particles" id="particles"></div>
-    
-    <div style="z-index:2">
-      <div class="hero-pill reveal" data-ar="متاح للمشاريع الجديدة" data-en="Available for new projects">متاح للمشاريع الجديدة</div>
-      <h1 class="hero-title reveal delay-1">
-        <span data-ar="أصمم مواقع وبنية أتمتة" data-en="I build websites & automations">أصمم مواقع وبنية أتمتة</span><br>
-        <em id="typed-text"></em>
-      </h1>
-      <p class="hero-sub reveal delay-2" data-ar="أساعد الشركات وأصحاب المشاريع في أتمتة أعمالهم وتصميم واجهات مستخدم فريدة تزيد من مبيعاتهم وتحول أفكارهم إلى واقع رقمي حقيقي." data-en="I help businesses automate their operations and design unique user interfaces that boost sales and turn concepts into true digital realities.">
-        أساعد الشركات وأصحاب المشاريع في أتمتة أعمالهم وتصميم واجهات مستخدم فريدة تزيد من مبيعاتهم وتحول أفكارهم إلى واقع رقمي حقيقي.
-      </p>
-      <div class="hero-btns reveal delay-3">
-        <a href="#services" class="btn-primary hov" data-ar="اكتشف خدماتي" data-en="See My Services">اكتشف خدماتي</a>
-        <a href="#about" class="btn-outline hov" data-ar="تعرف عليّ" data-en="About Me">تعرف عليّ</a>
-      </div>
-      <div class="hero-scroll reveal delay-4">
-        <div><span class="s-num count-num" data-target="0" id="svc-count">0</span><div class="s-label" data-ar="خدمة متاحة" data-en="Services available">خدمة متاحة</div></div>
-        <div><span class="s-num">100%</span><div class="s-label" data-ar="رضا العملاء" data-en="Client satisfaction">رضا العملاء</div></div>
-        <div><span class="s-num">24h</span><div class="s-label" data-ar="وقت الاستجابة" data-en="Response time">وقت الاستجابة</div></div>
-      </div>
-    </div>
-    
-    <div class="hero-card reveal-right delay-2">
-      <div class="hc-top">
-        <div class="hc-avatar">👨‍💻</div>
-        <div>
-          <div class="hc-name">Rahim Berich</div>
-          <div class="hc-role" data-ar="مصمم مواقع وخبير أتمتة" data-en="Web Designer & AI Automation">مصمم مواقع وخبير أتمتة</div>
-        </div>
-      </div>
-      <div class="hc-stats">
-        <div class="hc-stat"><div class="hc-num">3+</div><div class="hc-label" data-ar="سنوات خبرة" data-en="Years experience">سنوات خبرة</div></div>
-        <div class="hc-stat"><div class="hc-num">50+</div><div class="hc-label" data-ar="مشروع منجز" data-en="Projects done">مشروع منجز</div></div>
-        <div class="hc-stat"><div class="hc-num">AI</div><div class="hc-label" data-ar="خبير أتمتة" data-en="Automation expert">خبير أتمتة</div></div>
-        <div class="hc-stat"><div class="hc-num">🇩🇿</div><div class="hc-label" data-ar="الجزائر" data-en="Algeria">الجزائر</div></div>
-      </div>
-    </div>
-  </section>
-
-  <div class="marquee-wrap">
-    <div class="marquee-track" id="marquee-track"></div>
+<!-- SERVICE DETAIL PAGE -->
+<div id="dp">
+  <div class="dp-nav">
+    <button class="dp-back" onclick="closeDp()">
+      <span id="dp-back-txt">← رجوع</span>
+    </button>
+    <div class="dp-logo">Rahim<em>.</em></div>
+    <div style="width:80px"></div>
   </div>
-
-  <section class="section alt" id="services">
-    <div class="s-head">
-      <div>
-        <div class="s-tag reveal" data-ar="ما أقدمه" data-en="What I offer">ما أقدمه</div>
-        <h2 class="s-title reveal delay-1" data-ar="خدماتي" data-en="Services">خدماتي</h2>
-        <p class="s-sub reveal delay-2" data-ar="كل خدمة مصنوعة يدوياً — بدون قوالب، بدون تعقيد، وبكود نظيف وسريع." data-en="Every service is handcrafted — no templates, no bloat, just clean and fast code.">كل خدمة مصنوعة يدوياً — بدون قوالب، بدون تعقيد، وبكود نظيف وسريع.</p>
-      </div>
-    </div>
-    
-    <div class="grid" id="svc-grid"></div>
-  </section>
-
-  <div id="dp">
-    <div class="dp-nav">
-      <button class="dp-back" onclick="closeDp()"><span id="dp-back-txt">← رجوع</span></button>
-      <div class="dp-logo">Rahim<em>.</em></div>
-    </div>
-    <div class="dp-content">
-      <div class="dp-badge-row" id="dp-tags"></div>
-      <h1 class="dp-title" id="dp-title"></h1>
-      <div class="dp-price" id="dp-price"></div>
-      <div class="dp-gallery" id="dp-gallery"></div>
-      <div class="dp-desc" id="dp-desc"></div>
-      <div class="dp-meta" id="dp-meta"></div>
-      
-      <div class="order-box">
-        <div class="order-title" data-ar="اطلب هذه الخدمة" data-en="Order This Service">اطلب هذه الخدمة</div>
-        <div class="order-sub" data-ar="يرجى ملء النموذج أدناه وسأتواصل معك مباشرة لمناقشة التفاصيل والإطلاق." data-en="Please fill out the form below and I will get back to you directly to discuss details.">يرجى ملء النموذج أدناه وسأتواصل معك مباشرة لمناقشة التفاصيل والإطلاق.</div>
-        <form id="order-form" onsubmit="submitOrder(e)">
-          <input type="hidden" id="of-sid">
-          <div class="of-row">
-            <div class="of-field"><label data-ar="الاسم الكامل *" data-en="Full Name *">الاسم الكامل *</label><input type="text" name="name" required></div>
-            <div class="of-field"><label data-ar="البريد الإلكتروني *" data-en="Email Address *">البريد الإلكتروني *</label><input type="email" name="email" required></div>
-          </div>
-          <div class="of-row">
-            <div class="of-field"><label data-ar="الخدمة المطلوبة" data-en="Selected Service">الخدمة المطلوبة</label><input type="text" name="service" id="of-service" readonly></div>
-            <div class="of-field">
-              <label data-ar="الميزانية التقريبية" data-en="Estimated Budget">الميزانية التقريبية</label>
-              <select name="budget">
-                <option value="Under 5,000 DZD" data-ar="أقل من 5,000 دج" data-en="Under 5,000 DZD">أقل من 5,000 دج</option>
-                <option value="5,000 - 15,000 DZD" data-ar="5,000 - 15,000 دج" data-en="5,000 - 15,000 DZD">5,000 - 15,000 دج</option>
-                <option value="15,000 - 50,000 DZD" data-ar="15,000 - 50,000 دج" data-en="15,000 - 50,000 DZD">15,000 - 50,000 دج</option>
-                <option value="50,000+ DZD" data-ar="+50,000 دج" data-en="50,000+ DZD">+50,000 دج</option>
-              </select>
-            </div>
-          </div>
-          <div class="of-field"><label data-ar="تفاصيل ومتطلبات المشروع" data-en="Project Details & Requirements">تفاصيل ومتطلبات المشروع</label><textarea name="details" placeholder="..."></textarea></div>
+  <div class="dp-content">
+    <div class="dp-gallery" id="dp-gallery"></div>
+    <div class="dp-badge-row" id="dp-tags"></div>
+    <h1 class="dp-title" id="dp-title"></h1>
+    <div class="dp-price" id="dp-price"></div>
+    <p class="dp-desc" id="dp-desc"></p>
+    <div class="dp-meta" id="dp-meta"></div>
+    <div class="order-box">
+      <div class="order-title" data-ar="أرسل طلبك" data-en="Place Your Order">أرسل طلبك</div>
+      <div class="order-sub" data-ar="أملأ النموذج وسأرد عليك خلال 24 ساعة" data-en="Fill the form and I'll reply within 24 hours">أملأ النموذج وسأرد عليك خلال 24 ساعة</div>
+      <form id="order-form" onsubmit="submitOrder(event)">
+        <div class="of-row">
           <div class="of-field">
-            <label data-ar="كيف سمعت عني؟" data-en="How did you hear about me?">كيف سمعت عني؟</label>
-            <select name="source">
-              <option value="Instagram">Instagram</option>
-              <option value="GitHub">GitHub</option>
-              <option value="Recommendation" data-ar="توصية من صديق" data-en="Friend recommendation">توصية من صديق</option>
-              <option value="Other" data-ar="آخر" data-en="Other">آخر</option>
-            </select>
+            <label data-ar="الاسم الكامل" data-en="Full Name">الاسم الكامل</label>
+            <input type="text" name="name" required>
           </div>
-          <button type="submit" class="btn-order" data-ar="🚀 إرسال الطلب الآن" data-en="🚀 Send Order Now">🚀 إرسال الطلب الآن</button>
-        </form>
-      </div>
+          <div class="of-field">
+            <label data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</label>
+            <input type="email" name="email" required>
+          </div>
+        </div>
+        <div class="of-field">
+          <label data-ar="الخدمة المطلوبة" data-en="Requested Service">الخدمة المطلوبة</label>
+          <input type="text" name="service" id="of-service" readonly>
+        </div>
+        <div class="of-field">
+          <label data-ar="ميزانيتك" data-en="Your Budget">ميزانيتك</label>
+          <input type="text" name="budget" placeholder="e.g. 5000 DZD">
+        </div>
+        <div class="of-field">
+          <label data-ar="تفاصيل المشروع" data-en="Project Details">تفاصيل المشروع</label>
+          <textarea name="details"></textarea>
+        </div>
+        <div class="of-field">
+          <label data-ar="كيف وجدتني؟" data-en="How did you find me?">كيف وجدتني؟</label>
+          <select name="source">
+            <option data-ar="إنستغرام" data-en="Instagram">إنستغرام</option>
+            <option data-ar="جوجل" data-en="Google">جوجل</option>
+            <option data-ar="توصية" data-en="Referral">توصية</option>
+            <option data-ar="أخرى" data-en="Other">أخرى</option>
+          </select>
+        </div>
+        <input type="hidden" name="service_id" id="of-sid">
+        <input type="hidden" name="_to" value="rahimbrrich@gmail.com">
+        <button type="submit" class="btn-order" data-ar="🚀 إرسال الطلب" data-en="🚀 Send Order">🚀 إرسال الطلب</button>
+      </form>
     </div>
   </div>
+</div>
 
-  <section class="section" id="about">
-    <div class="about-wrap">
-      <div class="about-img reveal">🚀</div>
-      <div>
-        <div class="s-tag reveal" data-ar="من أنا" data-en="Who I am">من أنا</div>
-        <h2 class="s-title reveal delay-1" data-ar="أصمم المستقبل بذكاء وبساطة" data-en="Designing the future smartly & simply">أصمم المستقبل بذكاء وبساطة</h2>
-        <p class="s-sub reveal delay-2" data-ar="مرحباً، أنا رحيم بريش، مصمم مواقع ومطور حلول أتمتة ذكاء اصطناعي من الجزائر. أجمع بين اللمسة الإبداعية في التصميم وقوة البرمجة والأتمتة لتطوير أنظمة عمل ذكية توفر الوقت والمال." data-en="Hi, I'm Rahim Berich, a Web Designer and AI Automation Developer from Algeria. I combine creative design with code and automation power to build smart systems that save time and money.">
-          مرحباً، أنا رحيم بريش، مصمم مواقع ومطور حلول أتمتة ذكاء اصطناعي من الجزائر. أجمع بين اللمسة الإبداعية في التصميم وقوة البرمجة والأتمتة لتطوير أنظمة عمل ذكية توفر الوقت والمال.
-        </p>
-        <ul class="check-list reveal delay-3">
-          <li data-ar="مواقع مخصصة 100% متوافقة مع الهواتف ومحركات البحث" data-en="100% custom websites responsive & SEO friendly">مواقع مخصصة 100% متوافقة مع الهواتف ومحركات البحث</li>
-          <li data-ar="أستخدم أتمتة الذكاء الاصطناعي لجعل موقعك يعمل لصالحك" data-en="I use AI automation to make your site work for you">أستخدم أتمتة الذكاء الاصطناعي لجعل موقعك يعمل لصالحك</li>
-          <li data-ar="تسليم سريع، تواصل مباشر، بدون وسيط" data-en="Fast turnaround, direct communication, no middlemen">تسليم سريع، تواصل مباشر، بدون وسيط</li>
-          <li data-ar="إذا لم تكن راضياً، أستمر في العمل حتى تكون كذلك" data-en="If you're not happy, I keep working until you are">إذا لم تكن راضياً، أستمر في العمل حتى تكون كذلك</li>
-        </ul>
-        <div class="skill-list">
-          <span class="skill-tag">Web Design</span>
-          <span class="skill-tag">n8n Automation</span>
-          <span class="skill-tag">UI / UX</span>
-          <span class="skill-tag">AI Integration</span>
-          <span class="skill-tag">HTML / CSS</span>
-          <span class="skill-tag">JavaScript</span>
-          <span class="skill-tag">Figma</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section alt" id="contact">
-    <div style="text-align:center;margin-bottom:3rem">
-      <div class="s-tag reveal" style="justify-content:center" data-ar="تواصل معي" data-en="Get in touch">تواصل معي</div>
-      <h2 class="s-title reveal delay-1" data-ar="لنعمل معاً" data-en="Let's work together">لنعمل معاً</h2>
-      <p class="s-sub reveal delay-2" style="margin:0 auto" data-ar="لديك مشروع؟ يسعدني سماع تفاصيله." data-en="Have a project in mind? I'd love to hear about it.">لديك مشروع؟ يسعدني سماع تفاصيله.</p>
-    </div>
-    <div class="contact-wrap">
-      <div class="contact-info">
-        <a href="mailto:rahimbrrich@gmail.com" class="ci-item hov reveal" style="cursor:none">
-          <div class="ci-icon">✉️</div>
-          <div><div class="ci-label" data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</div><div class="ci-val">rahimbrrich@gmail.com</div></div>
-        </a>
-        <a href="https://instagram.com/rahim_as_15" target="_blank" class="ci-item hov reveal delay-1" style="cursor:none">
-          <div class="ci-icon">📸</div>
-          <div><div class="ci-label">Instagram</div><div class="ci-val">@rahim_as_15</div></div>
-        </a>
-        <div class="ci-item hov reveal delay-2">
-          <div class="ci-icon">📍</div>
-          <div><div class="ci-label" data-ar="الموقع" data-en="Location">الموقع</div><div class="ci-val">Algeria 🇩🇿</div></div>
-        </div>
-        <div class="ci-item hov reveal delay-3">
-          <div class="ci-icon">⏱</div>
-          <div><div class="ci-label" data-ar="وقت الرد" data-en="Response time">وقت الرد</div><div class="ci-val" data-ar="خلال 24 ساعة" data-en="Within 24 hours">خلال 24 ساعة</div></div>
-        </div>
-      </div>
-      <div class="contact-form-box hov reveal-right">
-        <div class="cf-title" data-ar="أرسل رسالة" data-en="Send a message">أرسل رسالة</div>
-        <div class="cf-fields">
-          <div class="cf-field"><label data-ar="الاسم" data-en="Name">الاسم</label><input type="text" id="cf-name"></div>
-          <div class="cf-field"><label data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</label><input type="email" id="cf-email"></div>
-          <div class="cf-field"><label data-ar="الرسالة" data-en="Message">الرسالة</label><textarea id="cf-msg"></textarea></div>
-          <button class="btn-send" onclick="sendContact()" data-ar="إرسال الرسالة →" data-en="Send Message →">إرسال الرسالة →</button>
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer>
-  <div class="ft-top">
-    <div>
-      <div class="ft-logo">Rahim<em>.</em></div>
-      <div class="ft-desc" data-ar="مصمم مواقع وخبير أتمتة الذكاء الاصطناعي في الجزائر لتطوير حلول ذكية وعالية الكفاءة." data-en="Web designer & AI automation expert based in Algeria developing high-end, smart business solutions.">مصمم مواقع وخبير أتمتة الذكاء الاصطناعي في الجزائر لتطوير حلول ذكية وعالية الكفاءة.</div>
-    </div>
-    <div>
-      <div class="ft-col-title" data-ar="روابط سريعة" data-en="Quick Links">روابط سريعة</div>
-      <div class="ft-links">
-        <a href="#services" data-ar="الخدمات" data-en="Services">الخدمات</a>
-        <a href="#about" data-ar="من أنا" data-en="About">من أنا</a>
-        <a href="#contact" data-ar="اتصل بي" data-en="Contact">اتصل بي</a>
-      </div>
-    </div>
-  </div>
-  <div class="ft-bottom">
-    <span data-ar="© 2026 Rahim Berich — جميع الحقوق محفوظة" data-en="© 2026 Rahim Berich — All rights reserved">© 2026 Rahim Berich — جميع الحقوق محفوظة</span>
-    <span data-ar="صُنع بيدي في الجزائر 🇩🇿" data-en="Made by hand in Algeria 🇩🇿">صُنع بيدي في الجزائر 🇩🇿</span>
-  </div>
-</footer>
-
+<!-- ADMIN -->
 <div id="adm">
   <div id="adm-box">
-    <button class="adm-close" onclick="closeAdm()">×</button>
-    
+    <button class="adm-close" onclick="closeAdm()">✕</button>
     <div id="adm-login">
-      <div class="adm-title">إدارة <em>المتجر</em></div>
-      <div class="err" id="pwd-err">❌ كلمة المرور خاطئة!</div>
+      <div class="adm-title"><em>Admin</em> Panel</div>
       <div class="f">
-        <label>كلمة المرور الإدارية</label>
-        <input type="password" id="pwd" placeholder="••••••••">
+        <label>Password</label>
+        <input type="password" id="pwd" placeholder="••••••••" onkeydown="if(event.key==='Enter')chkPwd()">
       </div>
-      <button class="btn-submit" onclick="chkPwd()">دخول اللوحة ←</button>
+      <p class="err" id="pwd-err">Incorrect password</p>
+      <button class="btn-submit" onclick="chkPwd()">Enter</button>
     </div>
-
+    <!-- DASHBOARD choices -->
     <div id="adm-dash" style="display:none">
       <div class="adm-title">لوحة <em>التحكم</em></div>
       <div class="dash-choices">
@@ -545,6 +411,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.65);padding:3rem 3rem 1.5r
       </div>
     </div>
 
+    <!-- PANEL ADD -->
     <div id="panel-add" style="display:none">
       <button class="back-panel" onclick="showPanel(null)">← رجوع</button>
       <div class="adm-title">إضافة <em>خدمة</em></div>
@@ -571,23 +438,207 @@ footer{background:var(--navy);color:rgba(255,255,255,.65);padding:3rem 3rem 1.5r
       <div class="ok" id="adm-ok">✅ تمت الإضافة!</div>
     </div>
 
+    <!-- PANEL EDIT -->
     <div id="panel-edit" style="display:none">
       <button class="back-panel" onclick="showPanel(null)">← رجوع</button>
-      <div class="adm-title">تعديل <em>الخدمات</em></div>
+      <div class="adm-title">تعديل <em>خدمة</em></div>
       <div id="edit-list"></div>
+      <div id="edit-form" style="display:none;margin-top:1.5rem;border-top:1px solid var(--border);padding-top:1.5rem">
+        <p style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:1rem" id="edit-form-title"></p>
+        <div class="f"><label>العنوان بالعربية</label><input type="text" id="e-title-ar"></div>
+        <div class="f"><label>العنوان بالإنجليزية</label><input type="text" id="e-title-en"></div>
+        <div class="f2">
+          <div class="f"><label>السعر</label><input type="text" id="e-price"></div>
+          <div class="f"><label>الوسم</label><select id="e-badge"><option value="">بدون</option><option value="new">جديد</option><option value="hot">الأكثر طلباً</option><option value="free">مجاني</option></select></div>
+        </div>
+        <div class="f2">
+          <div class="f"><label>مدة التسليم</label><input type="text" id="e-delivery"></div>
+          <div class="f"><label>المراجعات</label><input type="text" id="e-rev"></div>
+        </div>
+        <div class="f"><label>الوصف بالعربية</label><textarea id="e-desc-ar"></textarea></div>
+        <div class="f"><label>الوصف بالإنجليزية</label><textarea id="e-desc-en"></textarea></div>
+        <button class="btn-submit" onclick="saveEdit()">💾 حفظ التعديلات</button>
+        <div class="ok" id="edit-ok">✅ تم الحفظ!</div>
+      </div>
     </div>
 
+    <!-- PANEL DELETE -->
     <div id="panel-delete" style="display:none">
       <button class="back-panel" onclick="showPanel(null)">← رجوع</button>
       <div class="adm-title">حذف <em>خدمة</em></div>
       <div id="delete-list"></div>
     </div>
-
   </div>
 </div>
 
+<!-- ══ MAIN ══ -->
+<main>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="particles" id="particles"></div>
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div>
+    <div class="hero-pill reveal" data-ar="متاح لمشاريع جديدة" data-en="Available for new projects">متاح لمشاريع جديدة</div>
+    <h1 class="hero-title reveal delay-1">
+      <span data-ar="أبني مواقع" data-en="I build websites">أبني مواقع</span><br>
+      <em id="typed-text"></em>
+    </h1>
+    <p class="hero-sub reveal delay-2" data-ar="أنا رحيم — مصمم مواقع وخبير أتمتة. أبني مواقع تعمل لصالحك وتوفر وقتك." data-en="I'm Rahim — web designer & automation expert. I build websites that work for you and save your time.">أنا رحيم — مصمم مواقع وخبير أتمتة. أبني مواقع تعمل لصالحك وتوفر وقتك.</p>
+    <div class="hero-btns reveal delay-3">
+      <a href="#services" class="btn-primary hov" data-ar="اكتشف خدماتي" data-en="See My Services">اكتشف خدماتي</a>
+      <a href="#about" class="btn-outline hov" data-ar="تعرف عليّ" data-en="About Me">تعرف عليّ</a>
+    </div>
+    <div class="hero-scroll reveal delay-4">
+      <div><span class="s-num count-num" data-target="0" id="svc-count">0</span><div class="s-label" data-ar="خدمة متاحة" data-en="Services available">خدمة متاحة</div></div>
+      <div><span class="s-num">100%</span><div class="s-label" data-ar="رضا العملاء" data-en="Client satisfaction">رضا العملاء</div></div>
+      <div><span class="s-num">24h</span><div class="s-label" data-ar="وقت الاستجابة" data-en="Response time">وقت الاستجابة</div></div>
+    </div>
+  </div>
+  <div class="hero-card reveal-right delay-2">
+    <div class="hc-top">
+      <div class="hc-avatar">👨‍💻</div>
+      <div>
+        <div class="hc-name">Rahim Berich</div>
+        <div class="hc-role" data-ar="مصمم مواقع وخبير أتمتة" data-en="Web Designer & AI Automation">مصمم مواقع وخبير أتمتة</div>
+      </div>
+    </div>
+    <div class="hc-stats">
+      <div class="hc-stat"><div class="hc-num">3+</div><div class="hc-label" data-ar="سنوات خبرة" data-en="Years experience">سنوات خبرة</div></div>
+      <div class="hc-stat"><div class="hc-num">50+</div><div class="hc-label" data-ar="مشروع منجز" data-en="Projects done">مشروع منجز</div></div>
+      <div class="hc-stat"><div class="hc-num">AI</div><div class="hc-label" data-ar="خبير أتمتة" data-en="Automation expert">خبير أتمتة</div></div>
+      <div class="hc-stat"><div class="hc-num">🇩🇿</div><div class="hc-label" data-ar="الجزائر" data-en="Algeria">الجزائر</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track" id="marquee-track"></div>
+</div>
+
+<!-- SERVICES -->
+<section class="section alt" id="services">
+  <div class="s-head">
+    <div>
+      <div class="s-tag reveal" data-ar="ما أقدمه" data-en="What I offer">ما أقدمه</div>
+      <h2 class="s-title reveal delay-1" data-ar="خدماتي" data-en="Services">خدماتي</h2>
+      <p class="s-sub reveal delay-2" data-ar="كل خدمة مصنوعة يدوياً — بدون قوالب، بدون اختصارات." data-en="Each service is crafted by hand — no templates, no shortcuts.">كل خدمة مصنوعة يدوياً — بدون قوالب، بدون اختصارات.</p>
+    </div>
+  </div>
+  <div class="grid" id="svc-grid">
+    <div class="empty-state"><div class="ei">🚀</div>
+      <p data-ar="لا توجد خدمات بعد — أضفها من لوحة الإدارة" data-en="No services yet — add them from the admin panel">لا توجد خدمات بعد — أضفها من لوحة الإدارة</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="about-wrap">
+    <div class="about-img hov reveal-left">👨‍💻</div>
+    <div class="reveal-right">
+      <div class="s-tag" data-ar="عني" data-en="About me">عني</div>
+      <h2 class="s-title">
+        <span data-ar="لست مصمم مواقع" data-en="Not your average">لست مصمم مواقع</span><br>
+        <em data-ar="اعتيادياً" data-en="web designer">اعتيادياً</em>
+      </h2>
+      <p class="s-sub" data-ar="بدأت بناء مواقع لأنني كنت متعباً من الدفع مقابل شيء أستطيع عمله بشكل أفضل. الآن أساعد الآخرين على فعل نفس الشيء." data-en="I started building websites because I was tired of paying for things I could do better. Now I help others do the same.">بدأت بناء مواقع لأنني كنت متعباً من الدفع مقابل شيء أستطيع عمله بشكل أفضل. الآن أساعد الآخرين على فعل نفس الشيء.</p>
+      <ul class="check-list">
+        <li data-ar="أكتب كل سطر كود يدوياً — ستلاحظ الفرق فوراً" data-en="Every line of code is handwritten — you'll notice the difference">أكتب كل سطر كود يدوياً — ستلاحظ الفرق فوراً</li>
+        <li data-ar="أستخدم أتمتة الذكاء الاصطناعي لجعل موقعك يعمل لصالحك" data-en="I use AI automation to make your site work for you">أستخدم أتمتة الذكاء الاصطناعي لجعل موقعك يعمل لصالحك</li>
+        <li data-ar="تسليم سريع، تواصل مباشر، بدون وسيط" data-en="Fast turnaround, direct communication, no middlemen">تسليم سريع، تواصل مباشر، بدون وسيط</li>
+        <li data-ar="إذا لم تكن راضياً، أستمر في العمل حتى تكون كذلك" data-en="If you're not happy, I keep working until you are">إذا لم تكن راضياً، أستمر في العمل حتى تكون كذلك</li>
+      </ul>
+      <div class="skill-list">
+        <span class="skill-tag">Web Design</span>
+        <span class="skill-tag">n8n Automation</span>
+        <span class="skill-tag">UI / UX</span>
+        <span class="skill-tag">AI Integration</span>
+        <span class="skill-tag">HTML / CSS</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">Figma</span>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section alt" id="contact">
+  <div style="text-align:center;margin-bottom:3rem">
+    <div class="s-tag reveal" style="justify-content:center" data-ar="تواصل معي" data-en="Get in touch">تواصل معي</div>
+    <h2 class="s-title reveal delay-1" data-ar="لنعمل معاً" data-en="Let's work together">لنعمل معاً</h2>
+    <p class="s-sub reveal delay-2" style="margin:0 auto" data-ar="لديك مشروع؟ يسعدني سماع تفاصيله." data-en="Have a project in mind? I'd love to hear about it.">لديك مشروع؟ يسعدني سماع تفاصيله.</p>
+  </div>
+  <div class="contact-wrap">
+    <div class="contact-info">
+      <a href="mailto:rahimbrrich@gmail.com" class="ci-item hov reveal" style="cursor:none">
+        <div class="ci-icon">✉️</div>
+        <div><div class="ci-label" data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</div><div class="ci-val">rahimbrrich@gmail.com</div></div>
+      </a>
+      <a href="https://instagram.com/rahim_as_15" target="_blank" class="ci-item hov reveal delay-1" style="cursor:none">
+        <div class="ci-icon">📸</div>
+        <div><div class="ci-label">Instagram</div><div class="ci-val">@rahim_as_15</div></div>
+      </a>
+      <div class="ci-item hov reveal delay-2">
+        <div class="ci-icon">📍</div>
+        <div><div class="ci-label" data-ar="الموقع" data-en="Location">الموقع</div><div class="ci-val">Algeria 🇩🇿</div></div>
+      </div>
+      <div class="ci-item hov reveal delay-3">
+        <div class="ci-icon">⏱</div>
+        <div><div class="ci-label" data-ar="وقت الرد" data-en="Response time">وقت الرد</div><div class="ci-val" data-ar="خلال 24 ساعة" data-en="Within 24 hours">خلال 24 ساعة</div></div>
+      </div>
+    </div>
+    <div class="contact-form-box hov reveal-right">
+      <div class="cf-title" data-ar="أرسل رسالة" data-en="Send a message">أرسل رسالة</div>
+      <div class="cf-fields">
+        <div class="cf-field"><label data-ar="الاسم" data-en="Name">الاسم</label><input type="text" id="cf-name"></div>
+        <div class="cf-field"><label data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</label><input type="email" id="cf-email"></div>
+        <div class="cf-field"><label data-ar="الرسالة" data-en="Message">الرسالة</label><textarea id="cf-msg"></textarea></div>
+        <button class="btn-send" onclick="sendContact()" data-ar="إرسال الرسالة →" data-en="Send Message →">إرسال الرسالة →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-top">
+    <div>
+      <div class="ft-logo">Rahim<em>.</em></div>
+      <div class="ft-desc" data-ar="مصمم مواقع وخبير أتمتة الذكاء الاصطناعي في الجزائر. أبني أشياء تعمل." data-en="Web designer & AI automation expert based in Algeria. Building things that work.">مصمم مواقع وخبير أتمتة الذكاء الاصطناعي في الجزائر. أبني أشياء تعمل.</div>
+    </div>
+    <div>
+      <div class="ft-col-title" data-ar="روابط" data-en="Links">روابط</div>
+      <div class="ft-links">
+        <a href="#services" data-ar="الخدمات" data-en="Services">الخدمات</a>
+        <a href="#about" data-ar="عني" data-en="About">عني</a>
+        <a href="#contact" data-ar="تواصل" data-en="Contact">تواصل</a>
+      </div>
+    </div>
+    <div>
+      <div class="ft-col-title" data-ar="تواصل" data-en="Contact">تواصل</div>
+      <div class="ft-links">
+        <a href="mailto:rahimbrrich@gmail.com">rahimbrrich@gmail.com</a>
+        <a href="https://instagram.com/rahim_as_15" target="_blank">@rahim_as_15</a>
+      </div>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <span data-ar="© 2026 Rahim Berich — جميع الحقوق محفوظة" data-en="© 2026 Rahim Berich — All rights reserved">© 2026 Rahim Berich — جميع الحقوق محفوظة</span>
+    <span data-ar="صُنع بيدي في الجزائر 🇩🇿" data-en="Made by hand in Algeria 🇩🇿">صُنع بيدي في الجزائر 🇩🇿</span>
+  </div>
+</footer>
+
 <script>
-/* ── CURSOR ── */
+/* ══════════════════════════════
+   CURSOR
+══════════════════════════════ */
 const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
@@ -599,7 +650,9 @@ document.addEventListener('mouseover',e=>{
   ring.style.borderColor=big?'rgba(37,99,235,.6)':'rgba(37,99,235,.35)';
 });
 
-/* ── INTRO ── */
+/* ══════════════════════════════
+   INTRO
+══════════════════════════════ */
 window.addEventListener('load',()=>{
   setTimeout(()=>{
     const i=document.getElementById('intro');
@@ -608,21 +661,29 @@ window.addEventListener('load',()=>{
   },3000);
 });
 
-/* ── HEADER SHRINK ── */
+/* ══════════════════════════════
+   HEADER SHRINK
+══════════════════════════════ */
 window.addEventListener('scroll',()=>document.getElementById('hdr').classList.toggle('sm',scrollY>60));
 
-/* ── SMOOTH SCROLL ── */
+/* ══════════════════════════════
+   SMOOTH SCROLL
+══════════════════════════════ */
 document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
   e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth'});
 }));
 
-/* ── SCROLL REVEAL ── */
+/* ══════════════════════════════
+   SCROLL REVEAL
+══════════════════════════════ */
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
 },{threshold:.12});
 document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>observer.observe(el));
 
-/* ── PARTICLES ── */
+/* ══════════════════════════════
+   PARTICLES
+══════════════════════════════ */
 (function(){
   const wrap=document.getElementById('particles');
   for(let i=0;i<18;i++){
@@ -635,9 +696,11 @@ document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>obse
   }
 })();
 
-/* ── TYPEWRITER ── */
+/* ══════════════════════════════
+   TYPEWRITER
+══════════════════════════════ */
 const typedEl=document.getElementById('typed-text');
-let isAr=true;
+let isAr=true; // starts Arabic
 const phrases={ar:['تعمل فعلاً','تحكي قصتك','تبيع لك'],en:['that actually work','that tell your story','that sell for you']};
 let phraseIdx=0,charIdx=0,deleting=false;
 function typeWrite(){
@@ -654,7 +717,9 @@ function typeWrite(){
 }
 typeWrite();
 
-/* ── MARQUEE ── */
+/* ══════════════════════════════
+   MARQUEE
+══════════════════════════════ */
 function buildMarquee(){
   const items=[
     {ar:'تصميم مواقع',en:'Web Design'},
@@ -672,193 +737,77 @@ function buildMarquee(){
 }
 buildMarquee();
 
-/* ── LANGUAGE TOGGLE ── */
+/* ══════════════════════════════
+   LANGUAGE TOGGLE
+══════════════════════════════ */
 function toggleLang(){
   isAr=!isAr;
   const html=document.documentElement;
   html.lang=isAr?'ar':'en';
   html.dir=isAr?'rtl':'ltr';
   document.getElementById('lang-btn').textContent=isAr?'EN':'AR';
+  // update all data-ar / data-en elements
   document.querySelectorAll('[data-ar]').forEach(el=>{
     el.textContent=isAr?el.dataset.ar:el.dataset.en;
   });
-  document.querySelectorAll('input[placeholder],textarea[placeholder]').forEach(el=>{
-    if(el.id==='pwd') return;
-    if(isAr && el.dataset.arPlaceholder) el.placeholder=el.dataset.arPlaceholder;
-    if(!isAr && el.dataset.enPlaceholder) el.placeholder=el.dataset.enPlaceholder;
-  });
   buildMarquee();
-  render();
+  phraseIdx=0;charIdx=0;deleting=false;
 }
 
 /* ══════════════════════════════
-   SERVICES DATA (LocalStorage Integration)
+   SERVICES DATA
 ══════════════════════════════ */
-// جلب المصفوفة من ذاكرة المتصفح الدائمة أو إنشاء واحدة جديدة فارغة
-let svcs = JSON.parse(localStorage.getItem('rahim_services')) || [];
-// حساب المعرف (ID) التالي ديناميكياً حتى لا يتداخل مع الخدمات القديمة
-let nid = svcs.length > 0 ? Math.max(...svcs.map(s => s.id)) + 1 : 1;
-let curSvc = null;
-
-function updateCount(){
-  document.getElementById('svc-count').textContent = svcs.length;
-}
+function loadSvcs(){try{return JSON.parse(localStorage.getItem('rahim_svcs')||'[]');}catch(e){return[];}}
+function saveSvcs(){try{localStorage.setItem('rahim_svcs',JSON.stringify(svcs));}catch(e){}}
+let svcs=loadSvcs();
+let nid=svcs.length?Math.max(...svcs.map(s=>s.id))+1:1;
+let curSvc=null;
+function updateCount(){document.getElementById('svc-count').textContent=svcs.length;}
 
 function mkCard(s){
   const bl={new:'b-new',hot:'b-hot',free:'b-free'};
   const bt={ar:{new:'جديد 🆕',hot:'الأكثر طلباً 🔥',free:'مجاني 🎁'},en:{new:'New 🆕',hot:'Most Popular 🔥',free:'Free 🎁'}};
   const lang=isAr?'ar':'en';
-  const title=lang==='ar'?(s.titleAr||s.titleEn):(s.titleEn||s.titleAr);
-  const desc=lang==='ar'?(s.descAr||s.descEn):(s.descEn||s.descAr);
+  const title=isAr?(s.titleAr||s.titleEn):(s.titleEn||s.titleAr);
+  const desc=isAr?(s.descAr||s.descEn):(s.descEn||s.descAr);
   const img1=s.imgs[0]||'',img2=s.imgs[1]||img1;
   const dots=s.imgs.length>1?`<div class="img-dots">${s.imgs.map((_,i)=>`<span class="img-dot${i===0?' active':''}"></span>`).join('')}</div>`:'';
-  
-  return `
-    <div class="card reveal" onclick="openDp(${s.id})">
-      <div class="card-imgs">
-        <img src="${img1}" loading="lazy">
-        ${s.imgs.length>1?`<img src="${img2}" loading="lazy">`:''}
-        ${s.badge?`<span class="card-badge ${bl[s.badge]}">${bt[lang][s.badge]}</span>`:''}
-        ${dots}
-      </div>
-      <div class="card-body">
-        <div class="card-title">${title}</div>
-        <div class="card-desc">${desc||''}</div>
-        <div class="card-footer">
-          <div class="card-price">${s.price}</div>
-          <div class="card-cta">${isAr?'التفاصيل →':'Details →'}</div>
-        </div>
+  return `<div class="card reveal" onclick="openDp(${s.id})">
+    <div class="card-imgs">
+      <img src="${img1}" loading="lazy">
+      ${s.imgs.length>1?`<img src="${img2}" loading="lazy">`:''}
+      ${s.badge?`<span class="card-badge ${bl[s.badge]}">${bt[lang][s.badge]}</span>`:''}
+      ${dots}
+    </div>
+    <div class="card-body">
+      <div class="card-title">${title}</div>
+      <div class="card-desc">${desc||''}</div>
+      <div class="card-footer">
+        <div class="card-price">${s.price}</div>
+        <div class="card-cta">${isAr?'التفاصيل →':'Details →'}</div>
       </div>
     </div>
-  `;
+  </div>`;
 }
 
 function render(){
   const g=document.getElementById('svc-grid');
+  const lang=isAr?'ar':'en';
   const emptyMsg=isAr?'لا توجد خدمات بعد — أضفها من لوحة الإدارة':'No services yet — add them from the admin panel';
   g.innerHTML=svcs.length?svcs.map(mkCard).join(''):`<div class="empty-state"><div class="ei">🚀</div><p>${emptyMsg}</p></div>`;
-  document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>{
-    if(!el.classList.contains('visible')) observer.observe(el);
-  });
+  document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>{if(!el.classList.contains('visible'))observer.observe(el);});
   updateCount();
 }
+render();
 
-/* ── ADMIN MANAGEMENT ── */
-const PWD='DAHI1212';
-function openAdm(){document.getElementById('adm').classList.add('open');document.getElementById('adm-login').style.display='block';document.getElementById('adm-dash').style.display='none';document.getElementById('pwd').value='';document.getElementById('pwd-err').style.display='none';showPanel(null);}
-function closeAdm(){document.getElementById('adm').classList.remove('open');}
-function chkPwd(){if(document.getElementById('pwd').value===PWD){document.getElementById('adm-login').style.display='none';document.getElementById('adm-dash').style.display='block';document.getElementById('adm-ok').style.display='none';}else{document.getElementById('pwd-err').style.display='block';document.getElementById('pwd').value='';}}
-document.getElementById('adm').addEventListener('click',function(e){if(e.target===this)closeAdm();});
-
-function showPanel(p){
-  ['panel-add','panel-edit','panel-delete'].forEach(id=>document.getElementById(id).style.display='none');
-  document.getElementById('adm-dash').style.display=p?'none':'block';
-  if(p){
-    document.getElementById('panel-'+p).style.display='block';
-    if(p==='edit') buildEditList();
-    if(p==='delete') buildDeleteList();
-  }
-}
-
-let uploadedImgs=[];
-function handleImgs(input){
-  uploadedImgs=[];const prev=document.getElementById('imgs-prev');prev.innerHTML='';
-  [...input.files].forEach(f=>{
-    const r=new FileReader();
-    r.onload=ev=>{
-      uploadedImgs.push(ev.target.result);
-      const img=document.createElement('img');img.src=ev.target.result;prev.appendChild(img);
-    };
-    r.readAsDataURL(f);
-  });
-}
-
-function addSvc(){
-  const tAr=document.getElementById('f-title-ar').value.trim();
-  const tEn=document.getElementById('f-title-en').value.trim();
-  const price=document.getElementById('f-price').value.trim();
-  if((!tAr&&!tEn)||!price||!uploadedImgs.length){showToast('⚠ Title, price and image required');return;}
-  
-  svcs.push({
-    id:nid++,
-    titleAr:tAr,
-    titleEn:tEn,
-    price,
-    badge:document.getElementById('f-badge').value,
-    delivery:document.getElementById('f-delivery').value.trim(),
-    revisions:document.getElementById('f-rev').value.trim(),
-    descAr:document.getElementById('f-desc-ar').value.trim(),
-    descEn:document.getElementById('f-desc-en').value.trim(),
-    imgs:[...uploadedImgs]
-  });
-  
-  // 💾 السطر السحري لحفظ التغييرات في ذاكرة المتصفح الدائمة
-  localStorage.setItem('rahim_services', JSON.stringify(svcs));
-  
-  render();
-  ['f-title-ar','f-title-en','f-price','f-delivery','f-rev','f-desc-ar','f-desc-en'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('f-badge').value='';document.getElementById('f-imgs').value='';document.getElementById('imgs-prev').innerHTML='';uploadedImgs=[];
-  document.getElementById('adm-ok').style.display='block';setTimeout(()=>document.getElementById('adm-ok').style.display='none',3000);
-}
-
-function buildEditList(){
-  const el=document.getElementById('edit-list');
-  if(!svcs.length){el.innerHTML='<div class="no-svcs">لا توجد خدمات لتعديلها</div>';return;}
-  el.innerHTML=svcs.map(s=>`
-    <div class="edit-item">
-      <div><div class="item-info">${s.titleAr||s.titleEn}</div><div class="item-price">${s.price}</div></div>
-      <button class="btn-edit-svc" onclick="loadEditSvc(${s.id})">تعديل ✏️</button>
-    </div>
-  `).join('');
-}
-
-function loadEditSvc(id){
-  const s=svcs.find(x=>x.id===id);if(!s)return;
-  showPanel('add');
-  document.getElementById('f-title-ar').value=s.titleAr||'';
-  document.getElementById('f-title-en').value=s.titleEn||'';
-  document.getElementById('f-price').value=s.price||'';
-  document.getElementById('f-badge').value=s.badge||'';
-  document.getElementById('f-delivery').value=s.delivery||'';
-  document.getElementById('f-rev').value=s.revisions||'';
-  document.getElementById('f-desc-ar').value=s.descAr||'';
-  document.getElementById('f-desc-en').value=s.descEn||'';
-  uploadedImgs=[...s.imgs];
-  const prev=document.getElementById('imgs-prev');prev.innerHTML='';
-  uploadedImgs.forEach(src=>{const img=document.createElement('img');img.src=src;prev.appendChild(img);});
-  svcs=svcs.filter(x=>x.id!==id);
-  localStorage.setItem('rahim_services', JSON.stringify(svcs));
-}
-
-function buildDeleteList(){
-  const el=document.getElementById('delete-list');
-  if(!svcs.length){el.innerHTML='<div class="no-svcs">لا توجد خدمات لحذفها</div>';return;}
-  el.innerHTML=svcs.map(s=>`
-    <div class="del-item">
-      <div><div class="item-info">${s.titleAr||s.titleEn}</div><div class="item-price">${s.price}</div></div>
-      <button class="btn-del-svc" onclick="deleteSvc(${s.id})">حذف 🗑️</button>
-    </div>
-  `).join('');
-}
-
-function deleteSvc(id){
-  if(!confirm('هل أنت متأكد من حذف هذه الخدمة؟'))return;
-  svcs=svcs.filter(x=>x.id!==id);
-  
-  // 💾 تحديث الذاكرة المحلية بعد الحذف مباشرة
-  localStorage.setItem('rahim_services', JSON.stringify(svcs));
-  
-  render();
-  buildDeleteList();
-  showToast('🗑️ تم حذف الخدمة بنجاح');
-}
-
-/* ── OVERLAY DETAILS VIEW ── */
+/* ══════════════════════════════
+   DETAIL PAGE
+══════════════════════════════ */
 function openDp(id){
-  const s=svcs.find(x=>x.id===id);if(!s)return;
+  const s=svcs.find(x=>x.id===id);if(!s)return;curSvc=s;
   const lang=isAr?'ar':'en';
   document.getElementById('dp-gallery').innerHTML=s.imgs.map(src=>`<img src="${src}" loading="lazy">`).join('');
-  const bl={new:isAr?'جديد':'New',hot:isAr?'الأكثر طلباً':'Popular',free:isAr?'مجاني':'Free'};
+  const bl={new:isAr?'جديد':'New',hot:isAr?'الأكثر طلباً':'Most Popular',free:isAr?'مجاني':'Free'};
   document.getElementById('dp-tags').innerHTML=s.badge?`<span class="dp-tag">${bl[s.badge]}</span>`:'';
   document.getElementById('dp-title').textContent=lang==='ar'?(s.titleAr||s.titleEn):(s.titleEn||s.titleAr);
   document.getElementById('dp-price').textContent=s.price;
@@ -876,47 +825,180 @@ function openDp(id){
 }
 function closeDp(){document.getElementById('dp').classList.remove('open');document.body.style.overflow='';}
 
-/* ── ORDER FORM SUBMISSION ── */
+/* ══════════════════════════════
+   ORDER FORM — sends to rahimbrrich@gmail.com via mailto fallback
+   (replace fetch URL with your n8n webhook)
+══════════════════════════════ */
 function submitOrder(e){
   e.preventDefault();
-  const btn=e.target.querySelector('.btn-order');
-  btn.classList.add('loading');btn.textContent=isAr?'جاري الإرسال...':'Sending...';
-  const data={
-    name:e.target.name.value,
-    email:e.target.email.value,
-    service:e.target.service.value,
-    budget:e.target.budget.value,
-    details:e.target.details.value,
-    source:e.target.source.value,
-    to:'rahimbrrich@gmail.com'
-  };
-  setTimeout(()=>{
-    btn.classList.remove('loading');
-    btn.textContent=isAr?'🚀 إرسال الطلب':'🚀 Send Order';
-    showToast(isAr?'✅ تم إرسال طلبك! سأرد خلال 24 ساعة':'✅ Order sent! I\'ll reply within 24 hours');
-    e.target.reset();closeDp();
-  },1200);
+  // فتح نموذج n8n مباشرة
+  window.open('https://n8n-production-1422.up.railway.app/form/8569c3f3-4710-45dc-9e5d-feb07c536752','_blank');
 }
 
-/* ── TOAST ── */
+/* ══════════════════════════════
+   ADMIN
+══════════════════════════════ */
+const PWD='DAHI1212';
+let editingId=null;
+
+function openAdm(){
+  document.getElementById('adm').classList.add('open');
+  document.getElementById('adm-login').style.display='block';
+  document.getElementById('adm-dash').style.display='none';
+  ['panel-add','panel-edit','panel-delete'].forEach(id=>document.getElementById(id).style.display='none');
+  document.getElementById('pwd').value='';
+  document.getElementById('pwd-err').style.display='none';
+}
+function closeAdm(){document.getElementById('adm').classList.remove('open');}
+function chkPwd(){
+  if(document.getElementById('pwd').value===PWD){
+    document.getElementById('adm-login').style.display='none';
+    document.getElementById('adm-dash').style.display='block';
+  }else{
+    document.getElementById('pwd-err').style.display='block';
+    document.getElementById('pwd').value='';
+  }
+}
+document.getElementById('adm').addEventListener('click',function(e){if(e.target===this)closeAdm();});
+
+function showPanel(name){
+  document.getElementById('adm-dash').style.display=name?'none':'block';
+  ['panel-add','panel-edit','panel-delete'].forEach(id=>document.getElementById(id).style.display='none');
+  if(name){
+    document.getElementById('panel-'+name).style.display='block';
+    if(name==='edit')buildEditList();
+    if(name==='delete')buildDeleteList();
+  }
+}
+
+/* ── IMAGE UPLOAD ── */
+let uploadedImgs=[];
+function handleImgs(input){
+  uploadedImgs=[];
+  const prev=document.getElementById('imgs-prev');prev.innerHTML='';
+  [...input.files].forEach(f=>{
+    const r=new FileReader();
+    r.onload=ev=>{
+      uploadedImgs.push(ev.target.result);
+      const img=document.createElement('img');img.src=ev.target.result;prev.appendChild(img);
+    };
+    r.readAsDataURL(f);
+  });
+}
+
+/* ── ADD SERVICE ── */
+function addSvc(){
+  const tAr=document.getElementById('f-title-ar').value.trim();
+  const tEn=document.getElementById('f-title-en').value.trim();
+  const price=document.getElementById('f-price').value.trim();
+  if((!tAr&&!tEn)||!price||!uploadedImgs.length){showToast('⚠ العنوان والسعر والصورة مطلوبة');return;}
+  svcs.push({id:nid++,titleAr:tAr,titleEn:tEn,price,
+    badge:document.getElementById('f-badge').value,
+    delivery:document.getElementById('f-delivery').value.trim(),
+    revisions:document.getElementById('f-rev').value.trim(),
+    descAr:document.getElementById('f-desc-ar').value.trim(),
+    descEn:document.getElementById('f-desc-en').value.trim(),
+    imgs:[...uploadedImgs]});
+  saveSvcs();
+  render();
+  ['f-title-ar','f-title-en','f-price','f-delivery','f-rev','f-desc-ar','f-desc-en'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('f-badge').value='';
+  document.getElementById('f-imgs').value='';
+  document.getElementById('imgs-prev').innerHTML='';
+  uploadedImgs=[];
+  document.getElementById('adm-ok').style.display='block';
+  setTimeout(()=>document.getElementById('adm-ok').style.display='none',3000);
+}
+
+/* ── EDIT LIST ── */
+function buildEditList(){
+  const el=document.getElementById('edit-list');
+  document.getElementById('edit-form').style.display='none';
+  if(!svcs.length){el.innerHTML='<div class="no-svcs">لا توجد خدمات بعد</div>';return;}
+  el.innerHTML=svcs.map(s=>`
+    <div class="edit-item">
+      <div><div class="item-info">${s.titleAr||s.titleEn}</div><div class="item-price">${s.price}</div></div>
+      <button class="btn-edit-svc" onclick="openEditForm(${s.id})">تعديل ✏️</button>
+    </div>`).join('');
+}
+
+function openEditForm(id){
+  const s=svcs.find(x=>x.id===id);if(!s)return;
+  editingId=id;
+  document.getElementById('edit-form-title').textContent='تعديل: '+(s.titleAr||s.titleEn);
+  document.getElementById('e-title-ar').value=s.titleAr||'';
+  document.getElementById('e-title-en').value=s.titleEn||'';
+  document.getElementById('e-price').value=s.price||'';
+  document.getElementById('e-badge').value=s.badge||'';
+  document.getElementById('e-delivery').value=s.delivery||'';
+  document.getElementById('e-rev').value=s.revisions||'';
+  document.getElementById('e-desc-ar').value=s.descAr||'';
+  document.getElementById('e-desc-en').value=s.descEn||'';
+  document.getElementById('edit-ok').style.display='none';
+  document.getElementById('edit-form').style.display='block';
+  document.getElementById('edit-form').scrollIntoView({behavior:'smooth'});
+}
+
+function saveEdit(){
+  const s=svcs.find(x=>x.id===editingId);if(!s)return;
+  s.titleAr=document.getElementById('e-title-ar').value.trim();
+  s.titleEn=document.getElementById('e-title-en').value.trim();
+  s.price=document.getElementById('e-price').value.trim();
+  s.badge=document.getElementById('e-badge').value;
+  s.delivery=document.getElementById('e-delivery').value.trim();
+  s.revisions=document.getElementById('e-rev').value.trim();
+  s.descAr=document.getElementById('e-desc-ar').value.trim();
+  s.descEn=document.getElementById('e-desc-en').value.trim();
+  saveSvcs();
+  render();
+  document.getElementById('edit-ok').style.display='block';
+  setTimeout(()=>{document.getElementById('edit-ok').style.display='none';buildEditList();},2000);
+}
+
+/* ── DELETE LIST ── */
+function buildDeleteList(){
+  const el=document.getElementById('delete-list');
+  if(!svcs.length){el.innerHTML='<div class="no-svcs">لا توجد خدمات</div>';return;}
+  el.innerHTML=svcs.map(s=>`
+    <div class="del-item">
+      <div><div class="item-info">${s.titleAr||s.titleEn}</div><div class="item-price">${s.price}</div></div>
+      <button class="btn-del-svc" onclick="deleteSvc(${s.id})">حذف 🗑️</button>
+    </div>`).join('');
+}
+
+function deleteSvc(id){
+  if(!confirm('هل أنت متأكد من حذف هذه الخدمة؟'))return;
+  svcs=svcs.filter(x=>x.id!==id);
+  saveSvcs();
+  render();buildDeleteList();
+  showToast('🗑️ تم حذف الخدمة');
+}
+
+/* ══════════════════════════════
+   TOAST
+══════════════════════════════ */
 function showToast(msg){
   const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';
   requestAnimationFrame(()=>t.classList.add('show'));
   clearTimeout(t._t);t._t=setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.style.display='none',300);},2800);
 }
 
-/* ── CONTACT SEND ── */
+/* ══════════════════════════════
+   CONTACT SEND
+══════════════════════════════ */
 function sendContact(){
-  const name=document.getElementById('cf-name').value;
-  const email=document.getElementById('cf-email').value;
-  const msg=document.getElementById('cf-msg').value;
+  const name=document.getElementById('cf-name').value.trim();
+  const email=document.getElementById('cf-email').value.trim();
+  const msg=document.getElementById('cf-msg').value.trim();
   if(!name||!email||!msg){showToast(isAr?'⚠ يرجى ملء جميع الحقول':'⚠ Please fill all fields');return;}
-  showToast(isAr?'✅ شكراً لتواصلك! تم الاستلام':'✅ Thank you! Message received');
-  document.getElementById('cf-name').value='';document.getElementById('cf-email').value='';document.getElementById('cf-msg').value='';
+  const subject=encodeURIComponent((isAr?'رسالة جديدة من ':'New message from ')+name);
+  const body=encodeURIComponent(msg+'\n\n---\n'+(isAr?'من: ':'From: ')+name+' | '+email);
+  window.open('mailto:RAHIMBRRICH@GMAIL.COM?subject='+subject+'&body='+body,'_blank');
+  showToast(isAr?'✅ جاري فتح البريد الإلكتروني...':'✅ Opening email client...');
+  document.getElementById('cf-name').value='';
+  document.getElementById('cf-email').value='';
+  document.getElementById('cf-msg').value='';
 }
-
-// استدعاء دالة العرض تلقائياً عند تحميل الصفحة لقراءة البيانات المخزنة مسبقاً
-render();
 </script>
 </body>
 </html>
