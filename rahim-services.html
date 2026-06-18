@@ -297,6 +297,118 @@ footer{background:var(--navy);color:rgba(255,255,255,.65);padding:3rem 3rem 1.5r
 /* number counter animation */
 .count-num{display:inline-block}
 
+
+/* ── ORDER PAGE ── */
+#order-page{
+  display:none;position:fixed;inset:0;z-index:7000;
+  align-items:center;justify-content:center;
+  overflow-y:auto;padding:2rem 1rem;
+}
+#order-page.open{display:flex;animation:opIn .45s cubic-bezier(.22,1,.36,1)}
+@keyframes opIn{
+  from{opacity:0}
+  to{opacity:1}
+}
+.op-bg{
+  position:fixed;inset:0;
+  background:linear-gradient(135deg,var(--navy) 0%,#0d2147 60%,#0a1628 100%);
+  animation:opBgIn .45s cubic-bezier(.22,1,.36,1);
+}
+@keyframes opBgIn{from{opacity:0;transform:scale(1.04)}to{opacity:1;transform:scale(1)}}
+.op-card{
+  position:relative;z-index:1;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:28px;
+  padding:3rem 2.5rem;
+  width:100%;max-width:600px;
+  backdrop-filter:blur(20px);
+  animation:opCardIn .55s .1s cubic-bezier(.22,1,.36,1) both;
+  box-shadow:0 32px 80px rgba(0,0,0,.4);
+}
+@keyframes opCardIn{
+  from{opacity:0;transform:translateY(40px) scale(.97)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+.op-close{
+  position:absolute;top:1.2rem;left:1.2rem;
+  width:36px;height:36px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
+  border-radius:10px;color:rgba(255,255,255,.6);
+  font-size:16px;cursor:none;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s;
+}
+.op-close:hover{background:rgba(255,255,255,.15);color:#fff}
+.op-logo{
+  font-family:'DM Serif Display',serif;font-size:1.3rem;
+  color:#fff;text-align:center;margin-bottom:1rem;
+  animation:opCardIn .5s .2s both;
+}
+.op-logo em{font-style:italic;color:var(--blue)}
+.op-service-name{
+  text-align:center;font-size:11px;font-weight:700;
+  letter-spacing:3px;text-transform:uppercase;
+  color:var(--blue);background:rgba(37,99,235,.15);
+  border:1px solid rgba(37,99,235,.3);
+  border-radius:99px;padding:.35rem 1.2rem;
+  display:inline-block;margin:0 auto .8rem;
+  animation:opCardIn .5s .25s both;
+}
+.op-title{
+  font-family:'DM Serif Display',serif;font-size:2rem;
+  color:#fff;text-align:center;margin-bottom:.4rem;
+  animation:opCardIn .5s .3s both;
+}
+.op-sub{
+  font-size:13px;color:rgba(255,255,255,.4);
+  text-align:center;margin-bottom:2rem;
+  animation:opCardIn .5s .35s both;
+}
+.op-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.op-field{
+  margin-bottom:1rem;
+  animation:opCardIn .5s .4s both;
+}
+.op-field label{
+  display:block;font-size:10px;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;
+  color:rgba(255,255,255,.4);margin-bottom:.45rem;
+}
+.op-field input,.op-field textarea,.op-field select{
+  width:100%;padding:.85rem 1rem;
+  background:rgba(255,255,255,.06);
+  border:1.5px solid rgba(255,255,255,.1);
+  color:#fff;font-family:'DM Sans',sans-serif;font-size:13px;
+  border-radius:12px;outline:none;
+  transition:border-color .2s,background .2s;
+}
+.op-field input:focus,.op-field textarea:focus,.op-field select:focus{
+  border-color:var(--blue);background:rgba(37,99,235,.08);
+}
+.op-field input::placeholder,.op-field textarea::placeholder{color:rgba(255,255,255,.2)}
+.op-field select option{background:#0d2147;color:#fff}
+.op-field textarea{resize:vertical;min-height:90px}
+.op-submit{
+  width:100%;padding:1.1rem;
+  background:linear-gradient(135deg,var(--blue),var(--blue2));
+  color:#fff;border:none;border-radius:14px;
+  font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;
+  cursor:none;transition:all .3s;margin-top:.5rem;
+  box-shadow:0 8px 32px rgba(37,99,235,.35);
+  animation:opCardIn .5s .45s both;
+}
+.op-submit:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(37,99,235,.5)}
+.op-submit:active{transform:translateY(0)}
+.op-success{
+  display:none;text-align:center;padding:2rem 0;
+  animation:opCardIn .5s ease;
+}
+.op-success-icon{font-size:3rem;margin-bottom:1rem}
+.op-success-title{font-family:'DM Serif Display',serif;font-size:1.8rem;color:#fff;margin-bottom:.5rem}
+.op-success-sub{font-size:13px;color:rgba(255,255,255,.4)}
+@media(max-width:600px){.op-row{grid-template-columns:1fr}.op-card{padding:2rem 1.2rem}}
+
 /* ── RESPONSIVE ── */
 @media(max-width:960px){.hero{grid-template-columns:1fr}.hero-card{display:none}.about-wrap{grid-template-columns:1fr}.contact-wrap{grid-template-columns:1fr}}
 @media(max-width:650px){header{padding:0 1.2rem}nav{display:none}.hero{padding:110px 1.2rem 60px}.section{padding:4rem 1.2rem}.dp-nav{padding:0 1.2rem}.dp-content{padding:2rem 1rem 1rem}.dp-gallery{grid-template-columns:1fr}.dp-gallery img:first-child{aspect-ratio:4/3}footer{padding:2.5rem 1.2rem 1.5rem}.of-row{grid-template-columns:1fr}}
@@ -346,45 +458,64 @@ footer{background:var(--navy);color:rgba(255,255,255,.65);padding:3rem 3rem 1.5r
     <p class="dp-desc" id="dp-desc"></p>
     <div class="dp-meta" id="dp-meta"></div>
     <div class="order-box">
-      <div class="order-title" data-ar="أرسل طلبك" data-en="Place Your Order">أرسل طلبك</div>
-      <div class="order-sub" data-ar="أملأ النموذج وسأرد عليك خلال 24 ساعة" data-en="Fill the form and I'll reply within 24 hours">أملأ النموذج وسأرد عليك خلال 24 ساعة</div>
-      <form id="order-form" onsubmit="submitOrder(event)">
-        <div class="of-row">
-          <div class="of-field">
-            <label data-ar="الاسم الكامل" data-en="Full Name">الاسم الكامل</label>
-            <input type="text" name="name" required>
-          </div>
-          <div class="of-field">
-            <label data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</label>
-            <input type="email" name="email" required>
-          </div>
+      <div class="order-title" data-ar="جاهز للبدء؟" data-en="Ready to start?">جاهز للبدء؟</div>
+      <div class="order-sub" data-ar="اضغط الزر لفتح نموذج الطلب وسأرد خلال 24 ساعة" data-en="Press the button to open the order form — I\'ll reply within 24 hours">اضغط الزر لفتح نموذج الطلب وسأرد خلال 24 ساعة</div>
+      <button class="btn-order" onclick="openOrderPage()" data-ar="🚀 أرسل طلبك الآن" data-en="🚀 Place Your Order Now">🚀 أرسل طلبك الآن</button>
+    </div>
+  </div>
+</div>
+
+<!-- ORDER PAGE — full screen with animation -->
+<div id="order-page">
+  <div class="op-bg"></div>
+  <div class="op-card">
+    <button class="op-close" onclick="closeOrderPage()">✕</button>
+    <div class="op-logo">Rahim<em>.</em></div>
+    <div class="op-service-name" id="op-service-name"></div>
+    <h2 class="op-title" data-ar="أرسل طلبك" data-en="Place Your Order">أرسل طلبك</h2>
+    <p class="op-sub" data-ar="أملأ النموذج وسأرد عليك خلال 24 ساعة" data-en="Fill the form — I\'ll reply within 24 hours">أملأ النموذج وسأرد عليك خلال 24 ساعة</p>
+    <form id="order-form" onsubmit="submitOrder(event)" autocomplete="off">
+      <div class="op-row">
+        <div class="op-field">
+          <label data-ar="الاسم الكامل *" data-en="Full Name *">الاسم الكامل *</label>
+          <input type="text" name="name" id="op-name" required>
         </div>
-        <div class="of-field">
-          <label data-ar="الخدمة المطلوبة" data-en="Requested Service">الخدمة المطلوبة</label>
-          <input type="text" name="service" id="of-service" readonly>
+        <div class="op-field">
+          <label data-ar="البريد الإلكتروني *" data-en="Email *">البريد الإلكتروني *</label>
+          <input type="email" name="email" id="op-email" required>
         </div>
-        <div class="of-field">
+      </div>
+      <div class="op-field">
+        <label data-ar="الخدمة المطلوبة" data-en="Requested Service">الخدمة المطلوبة</label>
+        <input type="text" name="service" id="op-service" readonly>
+      </div>
+      <div class="op-row">
+        <div class="op-field">
           <label data-ar="ميزانيتك" data-en="Your Budget">ميزانيتك</label>
-          <input type="text" name="budget" placeholder="e.g. 5000 DZD">
+          <input type="text" name="budget" id="op-budget" placeholder="5000 DZD">
         </div>
-        <div class="of-field">
-          <label data-ar="تفاصيل المشروع" data-en="Project Details">تفاصيل المشروع</label>
-          <textarea name="details"></textarea>
-        </div>
-        <div class="of-field">
+        <div class="op-field">
           <label data-ar="كيف وجدتني؟" data-en="How did you find me?">كيف وجدتني؟</label>
-          <select name="source">
+          <select name="source" id="op-source">
             <option data-ar="إنستغرام" data-en="Instagram">إنستغرام</option>
             <option data-ar="جوجل" data-en="Google">جوجل</option>
             <option data-ar="توصية" data-en="Referral">توصية</option>
             <option data-ar="أخرى" data-en="Other">أخرى</option>
           </select>
         </div>
-        <input type="hidden" name="service_id" id="of-sid">
-        <input type="hidden" name="_to" value="rahimbrrich@gmail.com">
-        <button type="submit" class="btn-order" data-ar="🚀 إرسال الطلب" data-en="🚀 Send Order">🚀 إرسال الطلب</button>
-      </form>
-    </div>
+      </div>
+      <div class="op-field">
+        <label data-ar="تفاصيل المشروع" data-en="Project Details">تفاصيل المشروع</label>
+        <textarea name="details" id="op-details" rows="4"></textarea>
+      </div>
+      <input type="hidden" name="service_id" id="op-sid">
+      <button type="submit" class="op-submit" id="op-submit-btn" data-ar="🚀 إرسال الطلب" data-en="🚀 Send Order">🚀 إرسال الطلب</button>
+      <div class="op-success" id="op-success">
+        <div class="op-success-icon">✅</div>
+        <div class="op-success-title" data-ar="تم إرسال طلبك!" data-en="Order sent!">تم إرسال طلبك!</div>
+        <div class="op-success-sub" data-ar="سأتواصل معك خلال 24 ساعة على بريدك الإلكتروني" data-en="I\'ll contact you within 24 hours via email">سأتواصل معك خلال 24 ساعة على بريدك الإلكتروني</div>
+      </div>
+    </form>
   </div>
 </div>
 
@@ -755,14 +886,53 @@ function toggleLang(){
 }
 
 /* ══════════════════════════════
-   SERVICES DATA
+   SUPABASE — قاعدة بيانات سحابية مجانية
+   المنتجات تظهر لكل الزوار من أي جهاز
 ══════════════════════════════ */
-function loadSvcs(){try{return JSON.parse(localStorage.getItem('rahim_svcs')||'[]');}catch(e){return[];}}
-function saveSvcs(){try{localStorage.setItem('rahim_svcs',JSON.stringify(svcs));}catch(e){}}
-let svcs=loadSvcs();
-let nid=svcs.length?Math.max(...svcs.map(s=>s.id))+1:1;
+const SB_URL = 'PASTE_YOUR_SUPABASE_URL_HERE';
+const SB_KEY = 'PASTE_YOUR_SUPABASE_ANON_KEY_HERE';
+const SB_HDR = ()=>({'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json'});
+
+async function dbGetAll(){
+  if(SB_URL.includes('PASTE'))return [];
+  try{
+    const r=await fetch(SB_URL+'/rest/v1/services?order=id.asc',{headers:SB_HDR()});
+    if(!r.ok)return [];
+    const rows=await r.json();
+    return rows.map(s=>({...s,imgs:typeof s.imgs==='string'?JSON.parse(s.imgs||'[]'):(s.imgs||[])}));
+  }catch(e){return [];}
+}
+async function dbInsert(svc){
+  if(SB_URL.includes('PASTE'))return null;
+  try{
+    const r=await fetch(SB_URL+'/rest/v1/services',{method:'POST',headers:{...SB_HDR(),'Prefer':'return=representation'},body:JSON.stringify(svc)});
+    if(!r.ok)return null;
+    const rows=await r.json();return rows[0]||null;
+  }catch(e){return null;}
+}
+async function dbUpdate(id,data){
+  if(SB_URL.includes('PASTE'))return;
+  try{await fetch(SB_URL+'/rest/v1/services?id=eq.'+id,{method:'PATCH',headers:SB_HDR(),body:JSON.stringify(data)});}catch(e){}
+}
+async function dbDelete(id){
+  if(SB_URL.includes('PASTE'))return;
+  try{await fetch(SB_URL+'/rest/v1/services?id=eq.'+id,{method:'DELETE',headers:SB_HDR()});}catch(e){}
+}
+
+let svcs=[];
 let curSvc=null;
 function updateCount(){document.getElementById('svc-count').textContent=svcs.length;}
+
+async function initDB(){
+  const g=document.getElementById('svc-grid');
+  if(SB_URL.includes('PASTE')){
+    g.innerHTML='<div class="empty-state"><div class="ei">⚙️</div><p>أضف مفاتيح Supabase — اتبع الخطوات في ملف README</p></div>';
+    updateCount();return;
+  }
+  g.innerHTML='<div class="empty-state"><div class="ei">⏳</div><p>جاري تحميل الخدمات...</p></div>';
+  svcs=await dbGetAll();
+  render();
+}
 
 function mkCard(s){
   const bl={new:'b-new',hot:'b-hot',free:'b-free'};
@@ -770,12 +940,13 @@ function mkCard(s){
   const lang=isAr?'ar':'en';
   const title=isAr?(s.titleAr||s.titleEn):(s.titleEn||s.titleAr);
   const desc=isAr?(s.descAr||s.descEn):(s.descEn||s.descAr);
-  const img1=s.imgs[0]||'',img2=s.imgs[1]||img1;
-  const dots=s.imgs.length>1?`<div class="img-dots">${s.imgs.map((_,i)=>`<span class="img-dot${i===0?' active':''}"></span>`).join('')}</div>`:'';
+  const imgs_=Array.isArray(s.imgs)?s.imgs:(typeof s.imgs==='string'?JSON.parse(s.imgs||'[]'):[]);
+  const img1=imgs_[0]||'',img2=imgs_[1]||img1;
+  const dots=imgs_.length>1?`<div class="img-dots">${imgs_.map((_,i)=>`<span class="img-dot${i===0?' active':''}"></span>`).join('')}</div>`:'';
   return `<div class="card reveal" onclick="openDp(${s.id})">
     <div class="card-imgs">
       <img src="${img1}" loading="lazy">
-      ${s.imgs.length>1?`<img src="${img2}" loading="lazy">`:''}
+      ${imgs_.length>1?`<img src="${img2}" loading="lazy">`:''}
       ${s.badge?`<span class="card-badge ${bl[s.badge]}">${bt[lang][s.badge]}</span>`:''}
       ${dots}
     </div>
@@ -798,7 +969,7 @@ function render(){
   document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>{if(!el.classList.contains('visible'))observer.observe(el);});
   updateCount();
 }
-render();
+initDB();
 
 /* ══════════════════════════════
    DETAIL PAGE
@@ -806,7 +977,8 @@ render();
 function openDp(id){
   const s=svcs.find(x=>x.id===id);if(!s)return;curSvc=s;
   const lang=isAr?'ar':'en';
-  document.getElementById('dp-gallery').innerHTML=s.imgs.map(src=>`<img src="${src}" loading="lazy">`).join('');
+  const dpImgs=Array.isArray(s.imgs)?s.imgs:(typeof s.imgs==='string'?JSON.parse(s.imgs||'[]'):[]);
+  document.getElementById('dp-gallery').innerHTML=dpImgs.map(src=>`<img src="${src}" loading="lazy">`).join('');
   const bl={new:isAr?'جديد':'New',hot:isAr?'الأكثر طلباً':'Most Popular',free:isAr?'مجاني':'Free'};
   document.getElementById('dp-tags').innerHTML=s.badge?`<span class="dp-tag">${bl[s.badge]}</span>`:'';
   document.getElementById('dp-title').textContent=lang==='ar'?(s.titleAr||s.titleEn):(s.titleEn||s.titleAr);
@@ -829,10 +1001,65 @@ function closeDp(){document.getElementById('dp').classList.remove('open');docume
    ORDER FORM — sends to rahimbrrich@gmail.com via mailto fallback
    (replace fetch URL with your n8n webhook)
 ══════════════════════════════ */
+function openOrderPage(){
+  if(!curSvc)return;
+  // fill service info
+  const lang=isAr?'ar':'en';
+  const title=lang==='ar'?(curSvc.titleAr||curSvc.titleEn):(curSvc.titleEn||curSvc.titleAr);
+  document.getElementById('op-service-name').textContent=title;
+  document.getElementById('op-service').value=title;
+  document.getElementById('op-sid').value=curSvc.id;
+  // reset form state
+  document.getElementById('order-form').reset();
+  document.getElementById('op-service').value=title;
+  document.getElementById('op-success').style.display='none';
+  document.getElementById('op-submit-btn').style.display='block';
+  document.getElementById('op-service-name').textContent=title;
+  // apply lang to op labels
+  document.querySelectorAll('#order-page [data-ar]').forEach(el=>{
+    el.textContent=isAr?el.dataset.ar:el.dataset.en;
+  });
+  // open
+  const pg=document.getElementById('order-page');
+  pg.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeOrderPage(){
+  document.getElementById('order-page').classList.remove('open');
+  document.body.style.overflow='';
+}
+
 function submitOrder(e){
   e.preventDefault();
-  // فتح نموذج n8n مباشرة
-  window.open('https://n8n-production-1422.up.railway.app/form/8569c3f3-4710-45dc-9e5d-feb07c536752','_blank');
+  const btn=document.getElementById('op-submit-btn');
+  btn.textContent=isAr?'جاري الإرسال...':'Sending...';
+  btn.style.opacity='.7';btn.disabled=true;
+  const data={
+    name:document.getElementById('op-name').value,
+    email:document.getElementById('op-email').value,
+    service:document.getElementById('op-service').value,
+    budget:document.getElementById('op-budget').value,
+    details:document.getElementById('op-details').value,
+    source:document.getElementById('op-source').value,
+    to:'RAHIMBRRICH@GMAIL.COM'
+  };
+  // ── Send to n8n webhook ──
+  fetch('https://n8n-production-1422.up.railway.app/webhook/8569c3f3-4710-45dc-9e5d-feb07c536752',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(data)
+  }).catch(()=>{});
+  // show success after 1s regardless
+  setTimeout(()=>{
+    btn.style.display='none';
+    document.getElementById('op-success').style.display='block';
+    const sTitle=document.getElementById('op-success-title');
+    const sSub=document.getElementById('op-success-sub');
+    sTitle.textContent=isAr?'تم إرسال طلبك!':'Order sent!';
+    sSub.textContent=isAr?'سأتواصل معك خلال 24 ساعة':'I\'ll contact you within 24 hours';
+    setTimeout(()=>closeOrderPage(),3500);
+  },1000);
 }
 
 /* ══════════════════════════════
@@ -887,25 +1114,37 @@ function handleImgs(input){
 }
 
 /* ── ADD SERVICE ── */
-function addSvc(){
+async function addSvc(){
   const tAr=document.getElementById('f-title-ar').value.trim();
   const tEn=document.getElementById('f-title-en').value.trim();
   const price=document.getElementById('f-price').value.trim();
   if((!tAr&&!tEn)||!price||!uploadedImgs.length){showToast('⚠ العنوان والسعر والصورة مطلوبة');return;}
-  svcs.push({id:nid++,titleAr:tAr,titleEn:tEn,price,
+  const btn=document.querySelector('#panel-add .btn-submit');
+  btn.textContent='جاري النشر...'; btn.disabled=true;
+  const payload={
+    titleAr:tAr, titleEn:tEn, price,
     badge:document.getElementById('f-badge').value,
     delivery:document.getElementById('f-delivery').value.trim(),
     revisions:document.getElementById('f-rev').value.trim(),
     descAr:document.getElementById('f-desc-ar').value.trim(),
     descEn:document.getElementById('f-desc-en').value.trim(),
-    imgs:[...uploadedImgs]});
-  saveSvcs();
+    imgs:JSON.stringify(uploadedImgs)
+  };
+  if(!SB_URL.includes('PASTE')){
+    const saved=await dbInsert(payload);
+    if(saved){ saved.imgs=uploadedImgs; svcs.push(saved); }
+  } else {
+    // fallback: no supabase yet — show instructions
+    showToast('⚠ أضف مفاتيح Supabase أولاً — اقرأ التعليمات');
+    btn.textContent='✓ نشر الخدمة'; btn.disabled=false; return;
+  }
   render();
   ['f-title-ar','f-title-en','f-price','f-delivery','f-rev','f-desc-ar','f-desc-en'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('f-badge').value='';
   document.getElementById('f-imgs').value='';
   document.getElementById('imgs-prev').innerHTML='';
   uploadedImgs=[];
+  btn.textContent='✓ نشر الخدمة'; btn.disabled=false;
   document.getElementById('adm-ok').style.display='block';
   setTimeout(()=>document.getElementById('adm-ok').style.display='none',3000);
 }
@@ -939,7 +1178,7 @@ function openEditForm(id){
   document.getElementById('edit-form').scrollIntoView({behavior:'smooth'});
 }
 
-function saveEdit(){
+async function saveEdit(){
   const s=svcs.find(x=>x.id===editingId);if(!s)return;
   s.titleAr=document.getElementById('e-title-ar').value.trim();
   s.titleEn=document.getElementById('e-title-en').value.trim();
@@ -949,7 +1188,7 @@ function saveEdit(){
   s.revisions=document.getElementById('e-rev').value.trim();
   s.descAr=document.getElementById('e-desc-ar').value.trim();
   s.descEn=document.getElementById('e-desc-en').value.trim();
-  saveSvcs();
+  await dbUpdate(s.id,{titleAr:s.titleAr,titleEn:s.titleEn,price:s.price,badge:s.badge,delivery:s.delivery,revisions:s.revisions,descAr:s.descAr,descEn:s.descEn});
   render();
   document.getElementById('edit-ok').style.display='block';
   setTimeout(()=>{document.getElementById('edit-ok').style.display='none';buildEditList();},2000);
@@ -966,10 +1205,10 @@ function buildDeleteList(){
     </div>`).join('');
 }
 
-function deleteSvc(id){
+async function deleteSvc(id){
   if(!confirm('هل أنت متأكد من حذف هذه الخدمة؟'))return;
+  await dbDelete(id);
   svcs=svcs.filter(x=>x.id!==id);
-  saveSvcs();
   render();buildDeleteList();
   showToast('🗑️ تم حذف الخدمة');
 }
